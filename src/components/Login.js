@@ -5,7 +5,7 @@ import UserContext from "../UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gapi } from "gapi-script";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
@@ -77,10 +77,10 @@ const Login = () => {
       if (error.response && error.response.data.message) {
         errorMessage = error.response.data.message;
       }
-      setErrors({
-        ...errors,
-        googleLogin: errorMessage,
-      });
+      // setErrors({
+      //   ...errors,
+      //   googleLogin: errorMessage,
+      // });
     }
   };
 
@@ -100,51 +100,51 @@ const Login = () => {
     gapi.load("client:auth2", start);
   }, []);
 
-  const handleGoogleLogin = async (googleData) => {
-    console.log("Google login data:", googleData);
+  // const handleGoogleLogin = async (googleData) => {
+  //   console.log("Google login data:", googleData);
 
-    try {
-      const { tokenId } = googleData;
-      const response = await axios.post(
-        "http://localhost:5000/api/user/google-login",
-        { token: tokenId },
-        { withCredentials: true }
-      );
+  //   try {
+  //     const { tokenId } = googleData;
+  //     const response = await axios.post(
+  //       "http://localhost:5000/api/user/google-login",
+  //       { token: tokenId },
+  //       { withCredentials: true }
+  //     );
 
-      console.log("Google login response:", response);
+  //     console.log("Google login response:", response);
 
-      if (response.data && response.data.user) {
-        setUser(response.data.user);
-        setPlanId(response.data.user.planId);
+  //     if (response.data && response.data.user) {
+  //       setUser(response.data.user);
+  //       setPlanId(response.data.user.planId);
 
-        await checkAuth();
-        navigate(
-          response.data.user.planId ? "/ai-audio-summarizer" : "/pricing"
-        );
-      } else {
-        console.error("No user data received from backend");
-        setLoginError("Failed to log in with Google. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error during Google login:", error);
-      let errorMessage = "Failed to log in with Google. Please try again.";
-      if (error.response && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      setErrors({
-        ...errors,
-        googleLogin: errorMessage,
-      });
-    }
-  };
+  //       await checkAuth();
+  //       navigate(
+  //         response.data.user.planId ? "/ai-audio-summarizer" : "/pricing"
+  //       );
+  //     } else {
+  //       console.error("No user data received from backend");
+  //       setLoginError("Failed to log in with Google. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during Google login:", error);
+  //     let errorMessage = "Failed to log in with Google. Please try again.";
+  //     if (error.response && error.response.data.message) {
+  //       errorMessage = error.response.data.message;
+  //     }
+  //     setErrors({
+  //       ...errors,
+  //       googleLogin: errorMessage,
+  //     });
+  //   }
+  // };
 
   const handleLoginFailure = (error) => {
     console.error("Google Login Failed: ", error);
 
-    setErrors({
-      ...errors,
-      googleLogin: "Failed to log in with Google. Please try again.",
-    });
+    // setErrors({
+    //   ...errors,
+    //   googleLogin: "Failed to log in with Google. Please try again.",
+    // });
   };
 
   const navigateToSignup = () => {
@@ -206,11 +206,11 @@ const Login = () => {
                     {loginError && (
                       <div className="text-red-500 p-2">{loginError}</div>
                     )}
-                    {errors.googleLogin && (
-                      <div className="text-red-500 p-2">
-                        {errors.googleLogin}
-                      </div>
-                    )}
+                      {/* {errors.googleLogin && (
+                        <div className="text-red-500 p-2">
+                          {errors.googleLogin}
+                        </div>
+                      )} */}
                   </div>
                 </div>
 
@@ -241,7 +241,7 @@ const Login = () => {
               </div>
 
               <div>
-                <GoogleLogin
+                {/* <GoogleLogin
                   clientId={clientId}
                   render={(renderProps) => (
                     <button
@@ -256,7 +256,7 @@ const Login = () => {
                   onSuccess={handleGoogleLogin}
                   onFailure={handleLoginFailure}
                   cookiePolicy={"single_host_origin"}
-                />
+                /> */}
               </div>
               {/* Sign up link */}
               <div className="text-center text-sm mt-4">

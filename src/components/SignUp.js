@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { gapi } from "gapi-script";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import { FcGoogle } from "react-icons/fc";
 import UserContext from "../UserContext";
 
@@ -176,20 +176,20 @@ const Signup = () => {
         // Use the detailed error message from the backend
         errorMessage = error.response.data.message;
       }
-      setErrors({
-        ...errors,
-        googleLogin: errorMessage,
-      });
+      // setErrors({
+      //   ...errors,
+      //   googleLogin: errorMessage,
+      // });
     }
   };
 
   const handleSignupFailure = (error) => {
     console.error("Google Login Failed: ", error);
 
-    setErrors({
-      ...errors,
-      googleLogin: "Failed to log in with Google. Please try again.",
-    });
+    // setErrors({
+    //   ...errors,
+    //   googleLogin: "Failed to log in with Google. Please try again.",
+    // });
   };
   return (
     <motion.div
@@ -274,11 +274,11 @@ const Signup = () => {
                     {errors.server && (
                       <div className="text-red-500 p-2">{errors.server}</div>
                     )}
-                    {errors.googleLogin && (
+                    {/* {errors.googleLogin && (
                       <div className="text-red-500 p-2">
                         {errors.googleLogin}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -305,7 +305,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <GoogleLogin
+                {/* <GoogleLogin
                   clientId={clientId}
                   render={(renderProps) => (
                     <button
@@ -320,7 +320,7 @@ const Signup = () => {
                   onSuccess={handleGoogleSignup}
                   onFailure={handleSignupFailure}
                   cookiePolicy={"single_host_origin"}
-                />
+                /> */}
               </div>
 
               <div className="text-center text-sm mt-4">
