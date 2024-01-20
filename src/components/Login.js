@@ -53,7 +53,7 @@ const Login = () => {
       const loginData = { email, password };
       console.log("Sending login request with:", loginData);
       const response = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "https://virtualserver.onrender.com/api/user/login",
         loginData,
         { withCredentials: true }
       );
@@ -106,7 +106,7 @@ const Login = () => {
   //   try {
   //     const { tokenId } = googleData;
   //     const response = await axios.post(
-  //       "http://localhost:5000/api/user/google-login",
+  //       "https://virtualserver.onrender.com/api/user/google-login",
   //       { token: tokenId },
   //       { withCredentials: true }
   //     );
@@ -206,7 +206,7 @@ const Login = () => {
                     {loginError && (
                       <div className="text-red-500 p-2">{loginError}</div>
                     )}
-                      {/* {errors.googleLogin && (
+                    {/* {errors.googleLogin && (
                         <div className="text-red-500 p-2">
                           {errors.googleLogin}
                         </div>

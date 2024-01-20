@@ -33,7 +33,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/email/send-email",
+        "https://virtualserver.onrender.com/api/email/send-email",
         emailData
       );
       setSuccessMessage("Your message has been sent successfully!");

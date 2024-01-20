@@ -72,7 +72,7 @@ const CreateFlashcardsSet = () => {
       }
 
       const generateResponse = await fetch(
-        "http://localhost:5000/api/flashcard/generate-flashcards",
+        "https://virtualserver.onrender.com/api/flashcard/generate-flashcards",
         {
           method: "POST",
           credentials: "include",
@@ -89,7 +89,7 @@ const CreateFlashcardsSet = () => {
 
       const generatedData = await generateResponse.json();
       const saveResponse = await fetch(
-        "http://localhost:5000/api/flashcard/save-flashcards",
+        "https://virtualserver.onrender.com/api/flashcard/save-flashcards",
         {
           method: "POST",
           credentials: "include",

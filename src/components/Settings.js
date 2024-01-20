@@ -49,7 +49,7 @@ const Settings = () => {
       }
 
       const response = await axios.put(
-        "http://localhost:5000/api/user/update",
+        "https://virtualserver.onrender.com/api/user/update",
         { email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -100,7 +100,7 @@ const Settings = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/cancel-subscription",
+        "https://virtualserver.onrender.com/api/cancel-subscription",
         { userId: user.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -149,7 +149,7 @@ const Settings = () => {
       }
 
       const response = await axios.get(
-        "http://localhost:5000/api/user/has-plan",
+        "https://virtualserver.onrender.com/api/user/has-plan",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,

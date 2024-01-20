@@ -47,7 +47,7 @@ const Signup = () => {
     if (Object.keys(tempErrors).length === 0) {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/user/signup",
+          "https://virtualserver.onrender.com/api/user/signup",
           {
             email,
             password,
@@ -146,7 +146,7 @@ const Signup = () => {
     try {
       const { tokenId } = googleData;
       const response = await axios.post(
-        "http://localhost:5000/api/user/google-login",
+        "https://virtualserver.onrender.com/api/user/google-login",
         { token: tokenId },
         { withCredentials: true }
       );
