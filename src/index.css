@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// For Coming soon AI Tutor feature
 @keyframes bounce {
   0%,
   100% {
