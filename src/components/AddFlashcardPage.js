@@ -25,7 +25,7 @@ const AddFlashcardPage = () => {
       if (setId) {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/flashcard/sets/${setId}`,
+            `https://virtualserver.onrender.com/api/flashcard/sets/${setId}`,
             { withCredentials: true }
           );
           if (response.data) {
@@ -77,7 +77,7 @@ const AddFlashcardPage = () => {
     }
 
     try {
-      const url = `http://localhost:5000/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`;
+      const url = `https://virtualserver.onrender.com/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`;
       const response = await axios.delete(url, { withCredentials: true });
 
       if (response.status === 200) {

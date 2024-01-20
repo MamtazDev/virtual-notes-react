@@ -95,7 +95,7 @@ const EduEchoMain = () => {
         setLoading(true);
 
         let response = await fetch(
-          "http://localhost:5000/api/summary/upload-audio",
+          "https://virtualserver.onrender.com/api/summary/upload-audio",
           {
             method: "POST",
             body: formData,
@@ -110,7 +110,7 @@ const EduEchoMain = () => {
         const userId = user.id;
 
         response = await fetch(
-          "http://localhost:5000/api/summary/transcribe-audio",
+          "https://virtualserver.onrender.com/api/summary/transcribe-audio",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

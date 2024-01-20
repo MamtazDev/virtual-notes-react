@@ -19,7 +19,7 @@ const QuizGeneration = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/quiz/generate-quiz",
+        "https://virtualserver.onrender.com/api/quiz/generate-quiz",
         {
           method: "POST",
           body: formData,

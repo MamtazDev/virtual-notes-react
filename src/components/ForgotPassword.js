@@ -21,7 +21,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/forgot-password",
+        "https://virtualserver.onrender.com/forgot-password",
         { email }
       );
       setSuccess(response.data.message);
