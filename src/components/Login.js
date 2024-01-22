@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { gapi } from "gapi-script";
 // import { GoogleLogin } from "react-google-login";
 import { FcGoogle } from "react-icons/fc";
+import { API_URL } from "../config/config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -53,9 +54,11 @@ const Login = () => {
       const loginData = { email, password };
       console.log("Sending login request with:", loginData);
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/user/login",
+        `${API_URL}/api/user/login`,
         loginData,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
 
       console.log("Login response received:", response);
@@ -106,7 +109,7 @@ const Login = () => {
   //   try {
   //     const { tokenId } = googleData;
   //     const response = await axios.post(
-  //       "https://virtualserver.onrender.com/api/user/google-login",
+  //       `${API_URL}/api/user/google-login`,
   //       { token: tokenId },
   //       { withCredentials: true }
   //     );

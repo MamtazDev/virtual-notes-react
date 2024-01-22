@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
+import { API_URL } from "../config/config";
 
 const Contact = () => {
   const { user, setUser, userPlan, setUserPlan } = useContext(UserContext);
@@ -33,7 +34,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/email/send-email",
+        `${API_URL}/api/email/send-email`,
         emailData
       );
       setSuccessMessage("Your message has been sent successfully!");

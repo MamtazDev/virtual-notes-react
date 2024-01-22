@@ -3,6 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { API_URL } from "../config/config";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -20,10 +21,9 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://virtualserver.onrender.com/forgot-password",
-        { email }
-      );
+      const response = await axios.post(`${API_URL}/forgot-password`, {
+        email,
+      });
       setSuccess(response.data.message);
     } catch (error) {
       setErrors(

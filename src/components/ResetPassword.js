@@ -22,7 +22,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `https://virtualserver.onrender.com/reset-password/${resetToken}`,
+        `API_URL/reset-password/${resetToken}`,
         {
           password,
         }

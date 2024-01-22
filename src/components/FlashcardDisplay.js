@@ -24,9 +24,7 @@ const FlashcardDisplay = () => {
     console.log("Location state on FlashcardDisplay:", location.state);
     async function fetchFlashcards() {
       try {
-        const response = await fetch(
-          `https://virtualserver.onrender.com/api/flashcard/sets/${setId}`
-        );
+        const response = await fetch(`API_URL/api/flashcard/sets/${setId}`);
         const data = await response.json();
         setFlashcards(data.flashcards);
       } catch (error) {

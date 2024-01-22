@@ -7,6 +7,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import UserContext from "../UserContext";
 import axios from "axios";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import { API_URL } from "../config/config";
 
 const CheckoutForm = () => {
   const [billingCycle, setBillingCycle] = useState("monthly");
@@ -132,7 +133,7 @@ const CheckoutForm = () => {
       }
 
       const subscriptionResponse = await fetch(
-        "https://virtualserver.onrender.com/api/subscription/create-subscription",
+        `${API_URL}/api/subscription/create-subscription`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

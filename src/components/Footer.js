@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -21,14 +22,11 @@ export const Footer = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://virtualserver.onrender.com/subscribe-newsletter",
-        {
-          method: "POST",
-          body: JSON.stringify({ email }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await fetch(`${API_URL}/subscribe-newsletter`, {
+        method: "POST",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (response.ok) {
         setIsSubmitted(true);

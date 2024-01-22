@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "./config/config";
 
 const UserContext = createContext();
 
@@ -35,7 +36,7 @@ export const UserProvider = ({ children }) => {
   const logoutUser = async () => {
     try {
       await axios.post(
-        "https://virtualserver.onrender.com/api/user/logout",
+        `${API_URL}/api/user/logout`,
         {},
         { withCredentials: true }
       );
@@ -52,7 +53,7 @@ export const UserProvider = ({ children }) => {
   const refreshToken = async () => {
     try {
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/user/refresh-token",
+        `${API_URL}/api/user/refresh-token`,
         {},
         { withCredentials: true }
       );
@@ -74,7 +75,7 @@ export const UserProvider = ({ children }) => {
       return;
     }
 
-    const url = `https://virtualserver.onrender.com/api/flashcard/flashcard-sets/${setId}`;
+    const url = `${API_URL}/api/flashcard/flashcard-sets/${setId}`;
 
     try {
       // Send the entire array of flashcards to the backend
@@ -97,7 +98,7 @@ export const UserProvider = ({ children }) => {
   const addNewFlashcard = async (newFlashcardData, setId) => {
     try {
       const response = await axios.post(
-        `https://virtualserver.onrender.com/api/flashcard/flashcard-sets/${setId}/flashcards`,
+        `${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards`,
         newFlashcardData,
         { withCredentials: true }
       );
@@ -112,7 +113,7 @@ export const UserProvider = ({ children }) => {
   const deleteFlashcard = async (flashcardId, setId) => {
     try {
       const response = await axios.delete(
-        `https://virtualserver.onrender.com/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`,
+        `${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`,
         { withCredentials: true }
       );
       if (response.data && response.data.flashcards) {
@@ -126,7 +127,7 @@ export const UserProvider = ({ children }) => {
   const fetchFlashcardSets = async () => {
     try {
       const response = await axios.get(
-        "https://virtualserver.onrender.com/api/flashcard/flashcard-sets",
+        `${API_URL}/api/flashcard/flashcard-sets`,
         {
           withCredentials: true,
         }
@@ -142,7 +143,7 @@ export const UserProvider = ({ children }) => {
   const deleteFlashcardSet = async (setId) => {
     try {
       const response = await axios.delete(
-        `https://virtualserver.onrender.com/api/flashcard/flashcard-sets/${setId}`,
+        `${API_URL}/api/flashcard/flashcard-sets/${setId}`,
         { withCredentials: true }
       );
       if (response.status === 200) {
@@ -158,8 +159,10 @@ export const UserProvider = ({ children }) => {
   const fetchSavedSummaries = async () => {
     try {
       const response = await axios.get(
-        "https://virtualserver.onrender.com/api/summary/saved-summaries",
-        { withCredentials: true }
+        `${API_URL}/api/summary/saved-summaries`,
+        {
+          withCredentials: true,
+        }
       );
       if (response.status === 200 && response.data.summaries) {
         const sortedSummaries = response.data.summaries.sort(
@@ -182,7 +185,7 @@ export const UserProvider = ({ children }) => {
     try {
       console.log(`Attempting to delete summary with ID: ${summaryId}`);
       const response = await axios.delete(
-        `https://virtualserver.onrender.com/api/summary/summaries/${summaryId}`,
+        `${API_URL}/api/summary/summaries/${summaryId}`,
         { withCredentials: true }
       );
       console.log("Delete response:", response);
@@ -198,12 +201,9 @@ export const UserProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(
-        "https://virtualserver.onrender.com/api/user/data",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${API_URL}/api/user/data`, {
+        withCredentials: true,
+      });
       if (response.data && response.data.user) {
         setUser(response.data.user);
         setIsAuthenticated(true);
@@ -218,7 +218,7 @@ export const UserProvider = ({ children }) => {
       if (error.response?.status === 401) {
         try {
           const refreshResponse = await axios.post(
-            "https://virtualserver.onrender.com/api/user/refresh-token",
+            `${API_URL}/api/user/refresh-token`,
             {},
             { withCredentials: true }
           );
@@ -241,7 +241,7 @@ export const UserProvider = ({ children }) => {
     try {
       console.log("Sending summary to backend:", newSummary);
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/summary/save-summary",
+        `${API_URL}/api/summary/save-summary`,
         newSummary,
         { withCredentials: true }
       );

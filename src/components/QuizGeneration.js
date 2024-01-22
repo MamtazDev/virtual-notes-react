@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import QuizForm from "./QuizForm";
 import { motion } from "framer-motion";
+import { API_URL } from "../config/config";
 
 const QuizGeneration = () => {
   const navigate = useNavigate();
@@ -18,14 +19,11 @@ const QuizGeneration = () => {
     setError(""); // Clear any previous errors
 
     try {
-      const response = await fetch(
-        "https://virtualserver.onrender.com/api/quiz/generate-quiz",
-        {
-          method: "POST",
-          body: formData,
-          credentials: "include", // Make sure credentials include is set if your API requires it
-        }
-      );
+      const response = await fetch(`${API_URL}/api/quiz/generate-quiz`, {
+        method: "POST",
+        body: formData,
+        credentials: "include", // Make sure credentials include is set if your API requires it
+      });
 
       const data = await response.json(); // Get the response data
 

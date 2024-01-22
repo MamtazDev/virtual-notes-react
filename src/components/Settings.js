@@ -4,6 +4,7 @@ import UserContext from "../UserContext";
 import axios from "axios";
 import ConfirmationDialog from "./ConfirmationDialog";
 import classNames from "classnames";
+import { API_URL } from "../config/config";
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext);
@@ -49,7 +50,7 @@ const Settings = () => {
       }
 
       const response = await axios.put(
-        "https://virtualserver.onrender.com/api/user/update",
+        `${API_URL}/api/user/update`,
         { email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -100,7 +101,7 @@ const Settings = () => {
       }
 
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/cancel-subscription",
+        `${API_URL}/api/cancel-subscription`,
         { userId: user.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -148,14 +149,11 @@ const Settings = () => {
         return;
       }
 
-      const response = await axios.get(
-        "https://virtualserver.onrender.com/api/user/has-plan",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/api/user/has-plan`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
 
       if (response.data.hasPlan) {
         setUser({

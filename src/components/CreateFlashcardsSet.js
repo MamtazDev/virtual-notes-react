@@ -10,6 +10,7 @@ import {
 import Sidebar from "./Sidebar";
 import Spinner from "./Spinner";
 import { motion } from "framer-motion";
+import { API_URL } from "../config/config";
 
 const CreateFlashcardsSet = () => {
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ const CreateFlashcardsSet = () => {
       }
 
       const generateResponse = await fetch(
-        "https://virtualserver.onrender.com/api/flashcard/generate-flashcards",
+        `${API_URL}/api/flashcard/generate-flashcards`,
         {
           method: "POST",
           credentials: "include",
@@ -89,7 +90,7 @@ const CreateFlashcardsSet = () => {
 
       const generatedData = await generateResponse.json();
       const saveResponse = await fetch(
-        "https://virtualserver.onrender.com/api/flashcard/save-flashcards",
+        `${API_URL}/api/flashcard/save-flashcards`,
         {
           method: "POST",
           credentials: "include",

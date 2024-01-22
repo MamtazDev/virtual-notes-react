@@ -16,6 +16,8 @@ import Sidebar from "./Sidebar";
 import UserContext from "../UserContext";
 import axios from "axios";
 import Pagination from "./Pagination";
+import { API_URL } from "../config/config";
+import loader from "../assets/Spinner-1s-200px.svg";
 
 const EduEchoMain = () => {
   const [recording, setRecording] = useState(false);
@@ -39,6 +41,7 @@ const EduEchoMain = () => {
   const [selectedSummariesState, setSelectedSummariesState] = useState({});
   const dropdownRef = useRef(null);
   const buttonRefs = useRef([]);
+  const [timer, setTimer] = useState(null);
 
   const {
     user,
@@ -66,6 +69,12 @@ const EduEchoMain = () => {
       mediaRecorder.current.start();
       setRecording(true);
 
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      startTimer();
+
       setStartTime(new Date());
     } catch (error) {
       console.error("Error starting recording:", error);
@@ -78,9 +87,31 @@ const EduEchoMain = () => {
       setRecording(false);
 
       setEndTime(new Date());
+      // if (timer) {
+      clearTimeout(timer);
+      // }
     }
   };
 
+  //-----
+  const startTimer = () => {
+    const timerId = setTimeout(() => {
+      stopRecording();
+      console.log("Function triggered after 1 hour and 20 minutes");
+    }, 1 * 60 * 60 * 1000 + 20 * 60 * 1000);
+
+    setTimer(timerId);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [timer]);
+
+  // ------
   const handleAudioProcessing = async () => {
     if (mediaRecorder.current) {
       const audioBlob = new Blob(mediaRecorder.current.audioChunks, {
@@ -94,13 +125,10 @@ const EduEchoMain = () => {
       try {
         setLoading(true);
 
-        let response = await fetch(
-          "https://virtualserver.onrender.com/api/summary/upload-audio",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+        let response = await fetch(`${API_URL}/api/summary/upload-audio`, {
+          method: "POST",
+          body: formData,
+        });
         if (!response.ok) {
           throw new Error(`Error uploading audio: ${response.statusText}`);
         }
@@ -109,14 +137,11 @@ const EduEchoMain = () => {
 
         const userId = user.id;
 
-        response = await fetch(
-          "https://virtualserver.onrender.com/api/summary/transcribe-audio",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ audioID, userId }),
-          }
-        );
+        response = await fetch(`${API_URL}/api/summary/transcribe-audio`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ audioID, userId }),
+        });
         if (!response.ok) {
           throw new Error(`Error transcribing audio: ${response.statusText}`);
         }
@@ -364,7 +389,7 @@ const EduEchoMain = () => {
 
         <main className="container mx-auto px-4 space-y-12 py-10">
           {/* Controls Section */}
-          <section className="flex flex-col items-center space-y-4 w-full max-w-3xl mx-auto">
+          <section className="flex flex-col items-center  w-full max-w-3xl mx-auto">
             <div className="space-y-4 mb-11 pb-5">
               {recording ? (
                 <button
@@ -405,9 +430,10 @@ const EduEchoMain = () => {
 
             {/* Loading Spinner while Processing */}
             {loading && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="bg-black opacity-50 w-full h-full absolute"></div>
-                <RefreshIcon className="h-10 w-10 text-blue-500 animate-spin z-10" />
+              <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-[2px]">
+                <div className="bg-white opacity-25 w-full h-full absolute "></div>
+                {/* <RefreshIcon className="h-20 w-20 text-[#2563eb] animate-spin z-10" /> */}
+                <img src={loader} alt="" />
               </div>
             )}
 

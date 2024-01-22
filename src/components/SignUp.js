@@ -8,6 +8,7 @@ import { gapi } from "gapi-script";
 // import { GoogleLogin } from "react-google-login";
 import { FcGoogle } from "react-icons/fc";
 import UserContext from "../UserContext";
+import { API_URL } from "../config/config";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ const Signup = () => {
     if (Object.keys(tempErrors).length === 0) {
       try {
         const response = await axios.post(
-          "https://virtualserver.onrender.com/api/user/signup",
+          `${API_URL}/api/user/signup`,
           {
             email,
             password,
@@ -146,7 +147,7 @@ const Signup = () => {
     try {
       const { tokenId } = googleData;
       const response = await axios.post(
-        "https://virtualserver.onrender.com/api/user/google-login",
+        `${API_URL}/api/user/google-login`,
         { token: tokenId },
         { withCredentials: true }
       );
