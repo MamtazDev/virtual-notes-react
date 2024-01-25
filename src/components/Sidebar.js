@@ -40,7 +40,7 @@ function Sidebar() {
       name: "Quiz Generation",
       icon: BookOpenIcon,
       to: "/quiz-generation",
-      requiredPlans: ["student_plan"],
+      requiredPlans: ["student_plan", "free_trial"],
     },
     {
       name: "Flashcards",
@@ -70,6 +70,8 @@ function Sidebar() {
   ];
 
   const handleLinkClick = (item) => {
+    console.log("item:", item)
+
     if (item.requiredPlans.length > 0 && !item.requiredPlans.includes(planId)) {
       alert("Upgrade to access this feature.");
       return;

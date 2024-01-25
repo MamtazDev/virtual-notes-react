@@ -158,7 +158,7 @@ const Settings = () => {
       if (response.data.hasPlan) {
         setUser({
           ...user,
-          planId: response.data.planId,
+          planId: response.data?.planId,
           isSubscriptionActive: true,
         });
       } else {
@@ -173,15 +173,19 @@ const Settings = () => {
 
   const updateCancellationStatus = () => {
     const currentDate = new Date();
-    const subscriptionStartDate = new Date(user.subscriptionStartDate);
-    let canCancel = false;
-    if (user.planId === "free_trial") {
-      canCancel = currentDate - subscriptionStartDate < 7 * 24 * 60 * 60 * 1000;
-    } else if (user.planId === "student_plan") {
-      canCancel =
+    const subscriptionStartDate = new Date(user?.subscriptionStartDate);
+    let IscanCancel = false;
+    if (user?.planId === "free_trial") {
+      IscanCancel = currentDate - subscriptionStartDate < 7 * 24 * 60 * 60 * 1000;
+    } else if (user?.planId === "student_plan") {
+      IscanCancel =
         currentDate - subscriptionStartDate < 30 * 24 * 60 * 60 * 1000;
     }
+
+    console.log("IscanCancel:", IscanCancel)
+
     setCanCancel(canCancel);
+
   };
 
   useEffect(() => {
@@ -201,6 +205,22 @@ const Settings = () => {
 
     updateCancellationStatus();
   }, [user]);
+
+
+  useEffect(() =>{
+    // const currentDate = new Date();
+    // const subscriptionStartDate = new Date(user?.subscriptionStartDate);
+    // let IscanCancel = false;
+    // if (user?.planId === "free_trial") {
+    //   IscanCancel = currentDate - subscriptionStartDate < 7 * 24 * 60 * 60 * 1000;
+    // } else if (user?.planId === "student_plan") {
+    //   IscanCancel =
+    //     currentDate - subscriptionStartDate < 30 * 24 * 60 * 60 * 1000;
+    // }
+
+    // console.log("IscanCancel:", IscanCancel)
+
+  },[])
 
   return (
     <div className="flex min-h-screen bg-gray-100">

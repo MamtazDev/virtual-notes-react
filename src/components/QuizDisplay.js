@@ -165,6 +165,7 @@ const QuizDisplay = () => {
 };
 
 const TestReview = ({ questions, selectedOptions }) => {
+  
   const renderOptionWithPrefix = (option, index) => {
     const prefixes = ["A", "B", "C", "D"];
     const cleanOption = option.replace(/^[A-D]\.\s*/, "");
@@ -175,6 +176,9 @@ const TestReview = ({ questions, selectedOptions }) => {
       </span>
     );
   };
+
+  console.log("Questions:", questions)
+  console.log("Questions selectedOptions:", selectedOptions)
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">

@@ -7,6 +7,7 @@ import {
   ArrowLeftIcon,
 } from "@heroicons/react/solid";
 import UserContext from "../UserContext";
+import { API_URL } from "../config/config";
 
 const FlashcardDisplay = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ const FlashcardDisplay = () => {
     console.log("Location state on FlashcardDisplay:", location.state);
     async function fetchFlashcards() {
       try {
-        const response = await fetch(`API_URL/api/flashcard/sets/${setId}`);
+        const response = await fetch(`${API_URL}/api/flashcard/sets/${setId}`);
         const data = await response.json();
         setFlashcards(data.flashcards);
       } catch (error) {

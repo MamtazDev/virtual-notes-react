@@ -1,0 +1,102 @@
+Class Summarizer Enhancements:
+
+Parsing Logic Fix: Ensure the topic of the class is displayed at the top. ---> its already displayed in the localhost, facing problem to sumerizing audio //.
+Key Points Display: Key points should be listed under the "Key Points" section on the frontend. --> key points is not generating and showing in the api response //.
+Summary Integration: Add the class summary under the "Summary" section.-->"Summary"  is not generating and showing in the api response //.
+
+
+
+Duration Handling: The tool should handle classes up to 1 hour and 20 minutes, with an auto-stop feature. --->Done
+
+Loading Effect Improvement: Redesign the loading effect for a better user experience. --->Done
+Class Summarizer Processing Speed:
+
+
+ -------------************---------------
+
+Send a completion notification via email.
+
+
+Sign Up and Authentication Fixes:
+
+HTTP-Only Setup: Replicate the HTTP-only setup from the login for the sign-up process.
+Google Sign-In Fix: Ensure the Google sign-in feature is functioning correctly.
+
+
+
+Personalized AI Tutor Feature: Implement a feature where clicking the eye icon activates a tutor asking, "Do you need help understanding the concept?" This should help users understand concepts without giving away answers.
+
+
+
+
+
+
+
+
+
+ -------------************---------------//Todo frontend develop:// -------------************---------------
+
+Thoroughly test the web app to ensure full functionality and readiness for launch.
+Design and Aesthetic Enhancements:
+
+Secure the web app and ensure user-friendly error messages are displayed.
+Implement redirection to the login page for logged-out users.
+Testing and Finalization:
+
+
+Subscription Settings and Access Control:
+
+
+Flashcard Generation Module:
+
+Edit Set Functionality: Ensure the "Edit Set" button displays the title of the flashcard set and that the add, edit, and delete functions are working properly.
+
+Stripe Free Trial Setup:
+
+
+
+ -------------************---------------  //Todo backend develop: //  -------------************---------------
+
+Ensure users can cancel subscriptions and retain access based on their remaining plan time.    ------------- ****** Cancle Subscription
+Implement access restrictions for users without a plan or those logged out.
+
+Security and Error Handling:
+
+
+
+
+
+
+H:\VIrtual Notes\virtual-notes-react\src\components\QuizDisplay.js
+Results and Feedback: Display correct and wrong answers post-submission, along with the user's score.
+
+
+
+
+
+
+
+ -------------************---------------//Todo for UI://  -------------************---------------
+
+Make any design improvements to give the web app a professional, clean, and established appearance.
+
+
+
+
+
+Done
+
+Quiz Generation Improvements:
+
+Customizable Quizzes: Ensure quizzes reflect the selected number of questions and difficulty level. -- done
+
+
+H:\VIrtual Notes\virtual-notes-react\src\components\QuizDisplay.js
+Results and Feedback: Display correct and wrong answers post-submission, along with the user's score. -- Work In Processing
+
+
+Implement a free trial feature using Stripe. --- Done
+
+
+Optimize Processing Time: Improve the speed of processing class summaries.
+Background Processing: Implement a loading icon next to the summary in progress, allowing users to continue using other web app features. -- Done

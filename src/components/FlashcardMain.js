@@ -44,6 +44,8 @@ const FlashcardsMain = () => {
     });
   };
 
+
+
   // Function to handle navigation to the Study page
   const handleStudy = (setId) => {
     console.log("Navigating to FlashcardDisplay with setId:", setId);
@@ -109,11 +111,10 @@ const FlashcardsMain = () => {
             {flashcardSets.map((material, index) => (
               <div
                 key={material._id}
-                className={`cursor-pointer rounded-lg shadow-md ${
-                  selectedMaterials.has(index)
+                className={`cursor-pointer rounded-lg shadow-md ${selectedMaterials.has(index)
                     ? "ring-2 ring-blue-500 bg-blue-50"
                     : "bg-white"
-                }`}
+                  }`}
                 onClick={() => toggleSelectMaterial(index)}
               >
                 <FlashcardSetCard

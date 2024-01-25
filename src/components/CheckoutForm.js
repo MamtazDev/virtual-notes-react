@@ -189,6 +189,10 @@ const CheckoutForm = () => {
     animate: { opacity: 1, transition: { duration: 1 } },
   };
 
+
+  console.log("plan:", plan)
+
+
   return (
     <motion.div
       className="flex flex-col min-h-screen pt-4 bg-gray-100"
