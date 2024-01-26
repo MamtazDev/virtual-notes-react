@@ -8,8 +8,10 @@ Summary Integration: Add the class summary under the "Summary" section.-->"Summa
 
 Duration Handling: The tool should handle classes up to 1 hour and 20 minutes, with an auto-stop feature. --->Done
 
-Loading Effect Improvement: Redesign the loading effect for a better user experience. --->Done
 Class Summarizer Processing Speed:
+
+Loading Effect Improvement: Redesign the loading effect for a better user experience. --->Done
+
 
 
  -------------************---------------

@@ -34,6 +34,7 @@ const FlashcardsMain = () => {
     setSelectedMaterials(new Set());
   };
 
+  console.log("Demo console.log")
   const handleEdit = (setId) => {
     navigate("/edit-flashcards", {
       state: {
