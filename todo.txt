@@ -19,11 +19,6 @@ Loading Effect Improvement: Redesign the loading effect for a better user experi
 Send a completion notification via email.
 
 
-Sign Up and Authentication Fixes:
-
-HTTP-Only Setup: Replicate the HTTP-only setup from the login for the sign-up process.
-Google Sign-In Fix: Ensure the Google sign-in feature is functioning correctly.
-
 
 
 Personalized AI Tutor Feature: Implement a feature where clicking the eye icon activates a tutor asking, "Do you need help understanding the concept?" This should help users understand concepts without giving away answers.
@@ -88,17 +83,13 @@ Make any design improvements to give the web app a professional, clean, and esta
 
 Done
 
-Quiz Generation Improvements:
-
-Customizable Quizzes: Ensure quizzes reflect the selected number of questions and difficulty level. -- done
-
-
-H:\VIrtual Notes\virtual-notes-react\src\components\QuizDisplay.js
-Results and Feedback: Display correct and wrong answers post-submission, along with the user's score. -- Work In Processing
+Subscription
+logout
+signin error
 
 
-Implement a free trial feature using Stripe. --- Done
 
+Sign Up and Authentication Fixes:
 
-Optimize Processing Time: Improve the speed of processing class summaries.
-Background Processing: Implement a loading icon next to the summary in progress, allowing users to continue using other web app features. -- Done
+HTTP-Only Setup: Replicate the HTTP-only setup from the login for the sign-up process.
+Google Sign-In Fix: Ensure the Google sign-in feature is functioning correctly.

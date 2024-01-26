@@ -134,3 +134,7 @@ const FlashcardsMain = () => {
 };
 
 export default FlashcardsMain;
+
+
+
+// speeed optimization 

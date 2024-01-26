@@ -91,20 +91,45 @@ const Settings = () => {
   const handleConfirmCancellation = async () => {
     setLoading(true);
     setError("");
+    
+    console.log("Clicked on cancle subscription button!")
+    
     try {
       const token = localStorage.getItem("authToken");
-      if (!token) {
-        setError("Authentication required. Please log in again.");
-        setLoading(false);
-        setShowConfirmationDialog(false);
-        return;
-      }
 
-      const response = await axios.post(
-        `${API_URL}/api/cancel-subscription`,
-        { userId: user.id },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      console.log("token", user.id);
+      // const authTokn = 
+
+      // if (!token) {
+      //   setError("Authentication required. Please log in again.");
+      //   setLoading(false);
+      //   // setShowConfirmationDialog(false);
+      //   return;
+      // }
+
+      // const response = await axios.post(
+      //   `${API_URL}/api/cancel-subscription`,
+      //   { userId: user.id },
+      //   { headers: { Authorization: `Bearer ${token}` } }
+      // );
+
+      const bodydata = { userId: user.id }
+
+      const response = await fetch(`${API_URL}/api/subscription/cancel-subscription`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Make sure credentials include is set if your API requires it
+
+
+        body: JSON.stringify({ userId: user.id }),
+      });
+
+      const data = await response.json();
+
+
+      console.log("data: ", data)
+
+
 
       if (response.data.success) {
         const updatedUser = {
@@ -311,11 +336,9 @@ const Settings = () => {
               Manage your subscription plan and billing information.
             </p>
             <button
-              disabled={!canCancel}
+              // disabled={!canCancel}
               onClick={handleCancelSubscription}
-              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${
-                !canCancel ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 `}
             >
               Cancel Subscription
             </button>
