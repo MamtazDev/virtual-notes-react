@@ -25,7 +25,7 @@ const FlashcardDisplay = () => {
 
 
   // flash card id diye all flash card fetch korte hbe 
-
+  console.log("setId:", setId)
 
 
   const fetchFlashcardHandler = async () => {
@@ -38,8 +38,13 @@ const FlashcardDisplay = () => {
       );
       if (response.data && response.data.flashcardSets) {
         // setFlashcardSets(response.data.flashcardSets);
-        console.log("response.data: ",response.data.flashcardSets)
-        setFlashcards(response.data.flashcardSets)
+        const allCard = response.data.flashcardSets
+        const seletedFlashcard =  allCard.filter((item) => item._id === setId)
+        
+        console.log("response.flashcardSets: ",seletedFlashcard)
+
+
+        setFlashcards(seletedFlashcard[0].flashcards)
       }
     } catch (error) {
       console.error("Error fetching flashcard sets:", error);

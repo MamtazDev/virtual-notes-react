@@ -134,7 +134,7 @@ const FlashcardsMain = () => {
 
           {/* Grid layout for flashcards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-5">
-            {allFlashCard.length>0 ?  allFlashCard.map((material, index) => (
+            {allFlashCard.length> 0 ?  allFlashCard.map((material, index) => (
               <div
                 key={material._id}
                 className={`cursor-pointer rounded-lg shadow-md ${selectedMaterials.has(index)

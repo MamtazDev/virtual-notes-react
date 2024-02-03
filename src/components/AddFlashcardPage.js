@@ -7,6 +7,7 @@ import UserContext from "../UserContext";
 
 
 import { Dialog, Transition } from '@headlessui/react'
+import { API_URL } from "../config/config";
 // import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 const AddFlashcardPage = () => {
@@ -18,6 +19,8 @@ const AddFlashcardPage = () => {
     term: "",
     definition: "",
   });
+
+ 
   const { addNewFlashcard, handleSaveFlashcards } = useContext(UserContext);
 
   const [setId, setSetId] = useState(location.state?.setId);
@@ -29,8 +32,8 @@ const AddFlashcardPage = () => {
   const cancelButtonRef = useRef(null)
 
 
-  console.log("location.state", location.state)
-  console.log("Flash Card setId from location.state:", location.state.setId)
+  // console.log("location.state", location.state)
+  // console.log("Flash Card setId from location.state:", location.state.setId)
 
 
   useEffect(() => {}, [flashcards])
@@ -114,7 +117,7 @@ const AddFlashcardPage = () => {
     }
 
     try {
-      const url = `API_URL/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`;
+      const url = `${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/${flashcardId}`;
       const response = await axios.delete(url, { withCredentials: true });
 
       if (response.status === 200) {
@@ -148,12 +151,21 @@ const AddFlashcardPage = () => {
   };
 
   const startEditing = (flashcard) => {
+
+    console.log("flashcard:", flashcard)
+
     setEditingFlashcard({
       id: flashcard._id,
       term: flashcard.term,
       definition: flashcard.definition,
     });
+    setOpen(true)
   };
+
+  const editHandler = (flashcard) => {
+
+    startEditing(flashcard)
+  }
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
@@ -207,13 +219,13 @@ const AddFlashcardPage = () => {
                             <input
                               type="text"
                               placeholder="Term"
-                              // value={editingFlashcard.term}
+                              value={editingFlashcard.term}
                               // onChange={(e) => handleEditChange("term", e.target.value)}
                               className="w-full p-2 border rounded mb-2"
                             />
                             <textarea
                               placeholder="Definition"
-                              // value={editingFlashcard.definition}
+                              value={editingFlashcard.definition}
                               // onChange={(e) =>
                               //   handleEditChange("definition", e.target.value)
                               // }
@@ -229,14 +241,28 @@ const AddFlashcardPage = () => {
                       <button
                         type="button"
                         className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                        onClick={() => addNewFlahCard()}
+                        onClick={() => {
+                          
+                          setEditingFlashcard({
+                            id: null,
+                            term: "",
+                            definition: "",
+                          })
+                          
+                          addNewFlahCard()}}
                       >
                         Deactivate
                       </button>
                       <button
                         type="button"
                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                          setEditingFlashcard({
+                            id: null,
+                            term: "",
+                            definition: "",
+                          })
+                          setOpen(false)}}
                         ref={cancelButtonRef}
                       >
                         Cancel
@@ -293,7 +319,7 @@ const AddFlashcardPage = () => {
                   </div>
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => startEditing(flashcard)}
+                      onClick={() => editHandler(flashcard)}
                       className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition ease-in-out duration-300"
                     >
                       Edit
