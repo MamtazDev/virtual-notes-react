@@ -31,7 +31,14 @@ const AddFlashcardPage = () => {
   const [flashcards, setFlashcards] = useState(location.state?.flashcards);
   const [title, setTitle] = useState(location.state?.title);
 
+<<<<<<< HEAD
   const [open, setOpen] = useState(false);
+=======
+  const [open, setOpen] = useState(false)
+  const [newAdd, setNewAdd] = useState(false)
+
+  const cancelButtonRef = useRef(null)
+>>>>>>> 8ba095f4aed08ff58a06d5440d4c95ab3cca7ac1
 
   const cancelButtonRef = useRef(null);
 
@@ -77,7 +84,8 @@ const AddFlashcardPage = () => {
   };
 
   const handleAddNewFlashcard = async () => {
-    setOpen(true);
+    setOpen(true)
+    setNewAdd(true)
     // const newFlashcardData = { term: "", definition: "" };
     // await addNewFlashcard(newFlashcardData, setId);
 
@@ -88,10 +96,12 @@ const AddFlashcardPage = () => {
     // ]);
   };
 
-  const addNewFlahCard = async () => {
-    const newFlashcardData = {
-      term: "Dihan",
-      definition: `odules\@babel\parser\lib\index.js:13100:10)
+
+  const addNewFlahCard = async() => {
+    setNewAdd(false)
+    console.log(newAdd)
+    
+    const newFlashcardData = { term: "Dihan", definition: `odules\@babel\parser\lib\index.js:13100:10)
     at FlowParserMixin.parseStatementContent (H:\VIrtual Notes\virtual-notes-react\node_modules\@babel\parser\lib\index.js:12683:23)
     at FlowParserMixin.parseStatementLike (H:\VIrtual Notes\virtual-notes-react\node_modules\@babel\parser\lib\index.js:12588:17)`,
     };
@@ -165,6 +175,7 @@ const AddFlashcardPage = () => {
     startEditing(flashcard);
   };
 
+ 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       <Sidebar />
