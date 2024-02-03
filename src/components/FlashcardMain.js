@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar";
 import UserContext from "../UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import FlashcardSetCard from "./FlashcardSetCard";
+import { API_URL } from "../config/config";
+import axios from "axios";
 
 const FlashcardsMain = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const FlashcardsMain = () => {
     useContext(UserContext);
   const [selectedMaterials, setSelectedMaterials] = useState(new Set());
 
+  const [allFlashCard, setAllFlashCard] = useState([]);
   const [setId, setSetId] = useState(location.state?.setId);
   const [flashcards, setFlashcards] = useState(location.state?.flashcards);
   const [title, setTitle] = useState(location.state?.title);
@@ -70,6 +73,28 @@ const FlashcardsMain = () => {
     fetchData();
   }, [location, navigate, fetchFlashcardSets]);
 
+  const fetchFlashcardHandler = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/flashcard/flashcard-sets`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.data && response.data.flashcardSets) {
+        // setFlashcardSets(response.data.flashcardSets);
+        console.log("response.data: ",response.data.flashcardSets)
+        setAllFlashCard(response.data.flashcardSets)
+      }
+    } catch (error) {
+      console.error("Error fetching flashcard sets:", error);
+    }
+  };
+  useEffect(() => {
+    fetchFlashcardHandler()
+  }, [])
+
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar className="hidden lg:block" />
@@ -109,7 +134,7 @@ const FlashcardsMain = () => {
 
           {/* Grid layout for flashcards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-5">
-            {flashcardSets.map((material, index) => (
+            {allFlashCard.length>0 ?  allFlashCard.map((material, index) => (
               <div
                 key={material._id}
                 className={`cursor-pointer rounded-lg shadow-md ${selectedMaterials.has(index)
@@ -125,7 +150,7 @@ const FlashcardsMain = () => {
                   onStudy={() => handleStudy(material._id)}
                 />
               </div>
-            ))}
+            )) : <p>Loading....</p>}
           </div>
         </div>
       </div>

@@ -42,9 +42,10 @@ const Login = () => {
 
     if (Object.keys(tempErrors).length === 0) {
       const loginSuccessful = await handleLogin(email, password);
-      if (loginSuccessful) {
-        navigate("/ai-audio-summarizer");
-      }
+      // if (loginSuccessful) {
+        // navigate("/ai-audio-summarizer");
+        // navigate("/ai-audio-summarizer");
+      // }
     }
   };
 
@@ -65,9 +66,11 @@ const Login = () => {
       if (response.data && response.data.user) {
         setUser(response.data.user);
         setPlanId(response.data.user.planId);
+        console.log("response.data: ", response.data.user.isSubscriptionActive)
         await checkAuth();
+
         navigate(
-          response.data.user.planId ? "/ai-audio-summarizer" : "/pricing"
+          response.data.user.isSubscriptionActive ? "/ai-audio-summarizer" : "/pricing"
         );
         return true;
       } else {

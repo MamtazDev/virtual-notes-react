@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/solid";
 import UserContext from "../UserContext";
 import { API_URL } from "../config/config";
+import axios from "axios";
 
 const FlashcardDisplay = () => {
   const location = useLocation();
@@ -17,10 +18,36 @@ const FlashcardDisplay = () => {
   const [isTermShown, setIsTermShown] = useState(true);
   const { flashcardSets } = useContext(UserContext);
 
-  const [setId, setSetId] = useState(location.state?.setId);
-  const [flashcards, setFlashcards] = useState(location.state?.flashcards);
+  const [setId, setSetId] = useState(location.state?.id);
+  // const [flashcards, setFlashcards] = useState(location.state?.flashcards);
+  const [flashcards, setFlashcards] = useState(null);
   const [title, setTitle] = useState(location.state?.title);
 
+
+  // flash card id diye all flash card fetch korte hbe 
+
+
+
+  const fetchFlashcardHandler = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/flashcard/flashcard-sets`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.data && response.data.flashcardSets) {
+        // setFlashcardSets(response.data.flashcardSets);
+        console.log("response.data: ",response.data.flashcardSets)
+        setFlashcards(response.data.flashcardSets)
+      }
+    } catch (error) {
+      console.error("Error fetching flashcard sets:", error);
+    }
+  };
+  useEffect(() => {
+    fetchFlashcardHandler()
+  }, [])
   useEffect(() => {
     console.log("Location state on FlashcardDisplay:", location.state);
     async function fetchFlashcards() {
@@ -68,7 +95,11 @@ const FlashcardDisplay = () => {
     setIsTermShown(isDefinitionFirst);
   };
 
-  const handleEditFlashcards = () => {
+  const handleEditFlashcards = (setId) => {
+
+
+    console.log("titletitletitle",setId,flashcards,title)
+
     navigate("/edit-flashcards", {
       state: {
         setId,
@@ -131,10 +162,10 @@ const FlashcardDisplay = () => {
             <span className="text-md font-semibold">Term</span>
           </div>
           <span className="text-sm font-semibold">
-            Card {currentCardIndex + 1} / {flashcards.length}
+            Card {currentCardIndex + 1} / {flashcards?.length}
           </span>
         </div>
-        {flashcards && flashcards.length > 0 ? (
+        {flashcards && flashcards?.length > 0 ? (
           <>
             <div
               className="w-full max-w-4xl p-8 bg-white shadow-lg rounded-lg cursor-pointer"
@@ -189,7 +220,7 @@ const FlashcardDisplay = () => {
           </button>
         */}
 
-          {flashcards.map((card, index) => (
+          {flashcards?.map((card, index) => (
             <div
               key={index}
               className={`p-2 my-2 bg-gray-100 rounded cursor-pointer ${

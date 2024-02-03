@@ -20,7 +20,7 @@ const CheckoutForm = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [totalPrice, setTotalPrice] = useState(10);
+  const [totalPrice, setTotalPrice] = useState(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedPriceId, setSelectedPriceId] = useState("");
@@ -33,12 +33,17 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { plan } = location.state || {
+  const { plan  } = location.state || {
     price: 9.99,
     trialDays: 0,
     subscriptionPrice: 9.99,
     isFreeTrial: false,
   };
+
+  useEffect(() => {
+    console.log("plan ~:", plan)
+    console.log("plan ~:", plan.price)
+  },[])
 
   const planToPriceId = {
     free_trial: "price_free_trial",
@@ -260,7 +265,8 @@ const CheckoutForm = () => {
                   <div className="mt-2">
                     <span className="text-gray-600 text-lg">Total:</span>
                     <span className="ml-2 font-semibold text-lg">
-                      ${totalPrice}
+                      {/* ${totalPrice} */}
+                      ${plan?.price}
                     </span>
                   </div>
                 </div>

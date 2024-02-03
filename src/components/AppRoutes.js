@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Navigate, Routes } from "react-router-dom";
 
 import Home from "../components/Home";
 import About from "../components/About";
@@ -24,7 +24,20 @@ import CreateFlashcardsSet from "./CreateFlashcardsSet";
 import FlashcardDisplay from "./FlashcardDisplay";
 import AddFlashcardPage from "./AddFlashcardPage";
 
+const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      element={isAuthenticated ? <component /> : <Navigate to="/login" />}
+    />
+  );
+};
+
+
 const AppRoutes = () => {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   return (
     <>
       <Routes>
@@ -38,6 +51,19 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/ai-audio-summarizer" element={<Virtunotes />} />
+
+
+        {/* {isAuthenticated ? <Route path="/ai-audio-summarizer" element={<Virtunotes />} /> : <Route path="/login" element={<Login />} />} */}
+        {/* <PrivateRoute
+          path="/ai-audio-summarizer"
+          component={Virtunotes}
+          isAuthenticated={false}
+        /> */}
+
+
+
+
+
         <Route path="/settings" element={<Settings />} />
         <Route path="/checkout" element={<CheckoutForm />} />
         <Route path="/help" element={<HelpSupport />} />

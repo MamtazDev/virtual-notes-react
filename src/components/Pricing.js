@@ -43,14 +43,17 @@ function Pricing() {
     const planDetails = {
       free_trial: {
         productId: "prod_Oz7rQ78PYkbCNq",
+        price:"0"
       },
       student_plan: {
         productId: "prod_Oz7q5ksiXFH7mn",
+        price:"9.99"
       },
     };
+   
 
     navigate("/checkout", {
-      state: { plan: planDetails[planIdToSelect], planId: planIdToSelect },
+      state: { plan: planDetails[planIdToSelect]},
     });
   };
 

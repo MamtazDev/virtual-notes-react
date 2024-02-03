@@ -18,7 +18,7 @@ import UserContext from "../UserContext";
 import classNames from "classnames";
 import { handleLogout } from "./handleLogout";
 
-function Sidebar() {
+function Sidebar({ setHaveSubscription = null }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Sidebar() {
     useContext(UserContext);
   const [isBouncing, setIsBouncing] = useState(false);
 
-  console.log("Sidebar Current planId:", planId);
+
 
   const navItems = [
     { name: "Home", icon: HomeIcon, to: "/", requiredPlans: [] },
@@ -92,6 +92,12 @@ function Sidebar() {
     setTimeout(() => setIsBouncing(false), 500);
   };
 
+
+  useEffect(() => {
+    
+    console.log("Sidebar Current planId:", planId);
+    setHaveSubscription !== null &&  setHaveSubscription(planId)
+  }, [planId])
   return (
     <div>
       <div className="absolute top-4 left-4 lg:hidden">
@@ -103,9 +109,8 @@ function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 flex flex-col`}
+        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:translate-x-0 flex flex-col`}
       >
         <div className="flex items-center justify-between p-4 mb-8">
           <Link to="/" className="flex items-center">

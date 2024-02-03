@@ -4,10 +4,20 @@ import { useNavigate } from "react-router-dom";
 const FlashcardSetCard = ({ material, isSelected, onCardClick }) => {
   const navigate = useNavigate();
 
+
+  
+
   const handleStudyClick = (e) => {
     e.stopPropagation();
+
+    console.log("material:", material.title)
+    console.log("material:", material._id)
+
+
     navigate("/flashcard-display", {
-      state: { flashcards: material.flashcards },
+      state: {id: material._id,
+          title: material.title,
+        flashcards: material.flashcards },
     });
   };
 

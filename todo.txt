@@ -19,7 +19,7 @@ Loading Effect Improvement: Redesign the loading effect for a better user experi
 Send a completion notification via email.
 
 
-
+        
 
 Personalized AI Tutor Feature: Implement a feature where clicking the eye icon activates a tutor asking, "Do you need help understanding the concept?" This should help users understand concepts without giving away answers.
 

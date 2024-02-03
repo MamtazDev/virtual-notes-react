@@ -5,12 +5,14 @@ import axios from "axios";
 import ConfirmationDialog from "./ConfirmationDialog";
 import classNames from "classnames";
 import { API_URL } from "../config/config";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState(user?.email || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [haveSubscription, setHaveSubscription] = useState(null);
   const [showConfirmationDialog, setShowConfirmationDialog] =
     React.useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -20,6 +22,8 @@ const Settings = () => {
   const [canCancel, setCanCancel] = useState(user?.isSubscriptionActive);
   const [profileError, setProfileError] = useState("");
   const [subscriptionError, setSubscriptionError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -100,19 +104,6 @@ const Settings = () => {
       console.log("token", user.id);
       // const authTokn = 
 
-      // if (!token) {
-      //   setError("Authentication required. Please log in again.");
-      //   setLoading(false);
-      //   // setShowConfirmationDialog(false);
-      //   return;
-      // }
-
-      // const response = await axios.post(
-      //   `${API_URL}/api/cancel-subscription`,
-      //   { userId: user.id },
-      //   { headers: { Authorization: `Bearer ${token}` } }
-      // );
-
       const bodydata = { userId: user.id }
 
       const response = await fetch(`${API_URL}/api/subscription/cancel-subscription`, {
@@ -162,6 +153,9 @@ const Settings = () => {
     } finally {
       setLoading(false);
       setShowConfirmationDialog(false);
+      setHaveSubscription(null);
+      navigate(0)
+      // navigate("/subscriptionplans")
     }
   };
 
@@ -243,13 +237,18 @@ const Settings = () => {
     //     currentDate - subscriptionStartDate < 30 * 24 * 60 * 60 * 1000;
     // }
 
-    // console.log("IscanCancel:", IscanCancel)
+    // console.log("IscanCancel:", IscanCancel);
+    // setHaveSubscription(null)
 
   },[])
+  
+  useEffect(() =>{
+
+  },[haveSubscription])
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+      <Sidebar setHaveSubscription ={setHaveSubscription} />
       <div className="flex-1 flex flex-col p-6 lg:ml-72 lg:p-8 pt-20 md:pt-20 lg:pt-6">
         {/* Loading overlay */}
         {loading && (
@@ -328,7 +327,7 @@ const Settings = () => {
           </div>
 
           {/* Subscription Settings */}
-          <div className="bg-white p-4 lg:p-6 rounded-lg shadow">
+         {haveSubscription !=="defaultPlanId" && <div className="bg-white p-4 lg:p-6 rounded-lg shadow">
             <h2 className="text-xl lg:text-2xl font-semibold mb-4">
               Subscription Settings
             </h2>
@@ -357,7 +356,7 @@ const Settings = () => {
             {subscriptionError && (
               <p className=" text-red-500 mt-2">{subscriptionError}</p>
             )}
-          </div>
+          </div>}
 
           {/* Confirmation Dialog */}
           {showConfirmationDialog && (
