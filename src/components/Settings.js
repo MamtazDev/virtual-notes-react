@@ -26,8 +26,40 @@ const Settings = () => {
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = async (e) => {
     setEmail(e.target.value);
+
+
+
+    setLoading(true)
+    console.log("Inputed Value:",e.target.value)
+      
+
+    // try {
+    //   const response = await fetch(`${API_URL}/api/user/update`, {
+    //     method: "PUT",
+    //     headers: { "Content-Type": "application/json" },
+    //     credentials: "include", // Make sure credentials include is set if your API requires it
+  
+  
+    //     body: JSON.stringify({ email: e.target.value }),
+    //   });
+  
+    //   const data = await response.json();
+  
+  
+    //   console.log("data: ", data)
+      
+    // } catch (error) {
+    //   console.error("error", error)
+      
+      
+    // }finally{
+    //   setLoading(false)
+    // }
+
+      
+
   };
 
   const handleUpdateProfile = async () => {
@@ -120,7 +152,8 @@ const Settings = () => {
 
       const data = await response.json();
 
-      console.log("data: ", data);
+
+      console.log("data: ", data)
 
       if (response.data.success) {
         const updatedUser = {
