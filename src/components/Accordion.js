@@ -7,7 +7,7 @@ const Accordion = ({ title, content }) => {
   return (
     <div className="border-b border-gray-200 bg=white transition-all duration-300 ease-in-out">
       <button
-        className={`flex items-center justify-between w-full py-4 px-6 text-left focus:outline-none transition-all duration-300 ease-in-out ${
+        className={`flex items-center justify-between w-full py-4 px-6 text-left  transition-all duration-300 ease-in-out ${
           isOpen ? "text-blue-600" : "text-gray-700"
         }`}
         onClick={() => setIsOpen(!isOpen)}

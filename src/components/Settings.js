@@ -6,6 +6,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 import classNames from "classnames";
 import { API_URL } from "../config/config";
 import { useNavigate } from "react-router-dom";
+import spinner from "../assets/loading-spinner.svg";
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext);
@@ -95,32 +96,31 @@ const Settings = () => {
   const handleConfirmCancellation = async () => {
     setLoading(true);
     setError("");
-    
-    console.log("Clicked on cancle subscription button!")
-    
+
+    console.log("Clicked on cancle subscription button!");
+
     try {
       const token = localStorage.getItem("authToken");
 
       console.log("token", user.id);
-      // const authTokn = 
+      // const authTokn =
 
-      const bodydata = { userId: user.id }
+      const bodydata = { userId: user.id };
 
-      const response = await fetch(`${API_URL}/api/subscription/cancel-subscription`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // Make sure credentials include is set if your API requires it
+      const response = await fetch(
+        `${API_URL}/api/subscription/cancel-subscription`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Make sure credentials include is set if your API requires it
 
-
-        body: JSON.stringify({ userId: user.id }),
-      });
+          body: JSON.stringify({ userId: user.id }),
+        }
+      );
 
       const data = await response.json();
 
-
-      console.log("data: ", data)
-
-
+      console.log("data: ", data);
 
       if (response.data.success) {
         const updatedUser = {
@@ -154,7 +154,7 @@ const Settings = () => {
       setLoading(false);
       setShowConfirmationDialog(false);
       setHaveSubscription(null);
-      navigate(0)
+      navigate(0);
       // navigate("/subscriptionplans")
     }
   };
@@ -195,16 +195,16 @@ const Settings = () => {
     const subscriptionStartDate = new Date(user?.subscriptionStartDate);
     let IscanCancel = false;
     if (user?.planId === "free_trial") {
-      IscanCancel = currentDate - subscriptionStartDate < 7 * 24 * 60 * 60 * 1000;
+      IscanCancel =
+        currentDate - subscriptionStartDate < 7 * 24 * 60 * 60 * 1000;
     } else if (user?.planId === "student_plan") {
       IscanCancel =
         currentDate - subscriptionStartDate < 30 * 24 * 60 * 60 * 1000;
     }
 
-    console.log("IscanCancel:", IscanCancel)
+    console.log("IscanCancel:", IscanCancel);
 
     setCanCancel(canCancel);
-
   };
 
   useEffect(() => {
@@ -225,8 +225,7 @@ const Settings = () => {
     updateCancellationStatus();
   }, [user]);
 
-
-  useEffect(() =>{
+  useEffect(() => {
     // const currentDate = new Date();
     // const subscriptionStartDate = new Date(user?.subscriptionStartDate);
     // let IscanCancel = false;
@@ -236,24 +235,20 @@ const Settings = () => {
     //   IscanCancel =
     //     currentDate - subscriptionStartDate < 30 * 24 * 60 * 60 * 1000;
     // }
-
     // console.log("IscanCancel:", IscanCancel);
     // setHaveSubscription(null)
+  }, []);
 
-  },[])
-  
-  useEffect(() =>{
-
-  },[haveSubscription])
+  useEffect(() => {}, [haveSubscription]);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar setHaveSubscription ={setHaveSubscription} />
+      <Sidebar setHaveSubscription={setHaveSubscription} />
       <div className="flex-1 flex flex-col p-6 lg:ml-72 lg:p-8 pt-20 md:pt-20 lg:pt-6">
         {/* Loading overlay */}
         {loading && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
-            <p className="text-white text-lg">Processing...</p>
+            <img src={spinner} alt="" />
           </div>
         )}
 
@@ -327,36 +322,38 @@ const Settings = () => {
           </div>
 
           {/* Subscription Settings */}
-         {haveSubscription !=="defaultPlanId" && <div className="bg-white p-4 lg:p-6 rounded-lg shadow">
-            <h2 className="text-xl lg:text-2xl font-semibold mb-4">
-              Subscription Settings
-            </h2>
-            <p className="mb-4">
-              Manage your subscription plan and billing information.
-            </p>
-            <button
-              // disabled={!canCancel}
-              onClick={handleCancelSubscription}
-              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 `}
-            >
-              Cancel Subscription
-            </button>
+          {haveSubscription !== "defaultPlanId" && (
+            <div className="bg-white p-4 lg:p-6 rounded-lg shadow">
+              <h2 className="text-xl lg:text-2xl font-semibold mb-4">
+                Subscription Settings
+              </h2>
+              <p className="mb-4">
+                Manage your subscription plan and billing information.
+              </p>
+              <button
+                // disabled={!canCancel}
+                onClick={handleCancelSubscription}
+                className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 `}
+              >
+                Cancel Subscription
+              </button>
 
-            {!canCancel && subscriptionEndDate && (
-              <div className="mt-2 text-sm text-gray-700">
-                <p>
-                  Your subscription is scheduled to end on{" "}
-                  <span className="font-semibold">
-                    {formatDate(subscriptionEndDate)}
-                  </span>
-                  . No further action is needed.
-                </p>
-              </div>
-            )}
-            {subscriptionError && (
-              <p className=" text-red-500 mt-2">{subscriptionError}</p>
-            )}
-          </div>}
+              {!canCancel && subscriptionEndDate && (
+                <div className="mt-2 text-sm text-gray-700">
+                  <p>
+                    Your subscription is scheduled to end on{" "}
+                    <span className="font-semibold">
+                      {formatDate(subscriptionEndDate)}
+                    </span>
+                    . No further action is needed.
+                  </p>
+                </div>
+              )}
+              {subscriptionError && (
+                <p className=" text-red-500 mt-2">{subscriptionError}</p>
+              )}
+            </div>
+          )}
 
           {/* Confirmation Dialog */}
           {showConfirmationDialog && (

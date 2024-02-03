@@ -17,6 +17,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
 import classNames from "classnames";
 import { handleLogout } from "./handleLogout";
+import Swal from "sweetalert2";
 
 function Sidebar({ setHaveSubscription = null }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,13 @@ function Sidebar({ setHaveSubscription = null }) {
     console.log("item:", item)
 
     if (item.requiredPlans.length > 0 && !item.requiredPlans.includes(planId)) {
-      alert("Upgrade to access this feature.");
+      // alert("Upgrade to access this feature.");
+      Swal.fire({
+        title: 'Upgrade required!',
+        text: 'Upgrade to access this feature.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
       return;
     }
     navigate(item.to);
@@ -109,7 +116,7 @@ function Sidebar({ setHaveSubscription = null }) {
 
       {/* Sidebar */}
       <aside
-        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-10 ${isOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0 flex flex-col`}
       >
         <div className="flex items-center justify-between p-4 mb-8">

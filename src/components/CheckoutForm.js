@@ -33,7 +33,7 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { plan  } = location.state || {
+  const { plan } = location.state || {
     price: 9.99,
     trialDays: 0,
     subscriptionPrice: 9.99,
@@ -41,9 +41,9 @@ const CheckoutForm = () => {
   };
 
   useEffect(() => {
-    console.log("plan ~:", plan)
-    console.log("plan ~:", plan.price)
-  },[])
+    console.log("plan ~:", plan);
+    console.log("plan ~:", plan.price);
+  }, []);
 
   const planToPriceId = {
     free_trial: "price_free_trial",
@@ -194,9 +194,7 @@ const CheckoutForm = () => {
     animate: { opacity: 1, transition: { duration: 1 } },
   };
 
-
-  console.log("plan:", plan)
-
+  console.log("plan:", plan);
 
   return (
     <motion.div
@@ -207,8 +205,8 @@ const CheckoutForm = () => {
         <div className="container mx-auto flex flex-col px-4 lg:px-20">
           <Navbar />
           <div className="container mx-auto mt-20 p-8 bg-white shadow-lg max-w-4xl rounded-lg">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2 p-4">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-1/2 ">
                 <div
                   className="flex items-center mb-6 text-blue-500 cursor-pointer"
                   onClick={() => navigate("/pricing")}
@@ -221,7 +219,7 @@ const CheckoutForm = () => {
                   Subscribe to VirtuNotes
                 </h2>
                 <div className="border-b pb-4">
-                  <h3 className="font-semibold text-gray-700 mb-4">
+                  <h3 className="text-xl font-semibold text-gray-700 mb-4">
                     Order summary
                   </h3>
                   {!plan.isFreeTrial ? (
@@ -236,7 +234,7 @@ const CheckoutForm = () => {
                             onChange={() => setBillingCycle("yearly")}
                             className="form-radio h-5 w-5 text-blue-500"
                           />
-                          <span className="text-gray-700 text-lg">
+                          <span className="text-sm text-gray-700 ">
                             Yearly (Save 16%)
                           </span>
                         </label>
@@ -251,7 +249,7 @@ const CheckoutForm = () => {
                             onChange={() => setBillingCycle("monthly")}
                             className="form-radio h-5 w-5 text-blue-500"
                           />
-                          <span className="text-gray-700 text-lg">Monthly</span>
+                          <span className="text-sm text-gray-700">Monthly</span>
                         </label>
                       </div>
                     </div>
@@ -262,11 +260,12 @@ const CheckoutForm = () => {
                       </div>
                     </div>
                   )}
-                  <div className="mt-2">
-                    <span className="text-gray-600 text-lg">Total:</span>
-                    <span className="ml-2 font-semibold text-lg">
-                      {/* ${totalPrice} */}
-                      ${plan?.price}
+                  <div className="mt-12">
+                    <span className="text-gray-600 text-lg font-medium">
+                      Total:
+                    </span>
+                    <span className="ml-2 font-semibold text-lg text-gray-500">
+                      {/* ${totalPrice} */}${plan?.price}
                     </span>
                   </div>
                 </div>

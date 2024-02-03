@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FlashcardSetCard from "./FlashcardSetCard";
 import { API_URL } from "../config/config";
 import axios from "axios";
+import spinner from "../assets/loading-spinner.svg";
 
 const FlashcardsMain = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const FlashcardsMain = () => {
     setSelectedMaterials(new Set());
   };
 
-  console.log("Demo console.log")
+  console.log("Demo console.log");
   const handleEdit = (setId) => {
     navigate("/edit-flashcards", {
       state: {
@@ -47,8 +48,6 @@ const FlashcardsMain = () => {
       },
     });
   };
-
-
 
   // Function to handle navigation to the Study page
   const handleStudy = (setId) => {
@@ -83,17 +82,16 @@ const FlashcardsMain = () => {
       );
       if (response.data && response.data.flashcardSets) {
         // setFlashcardSets(response.data.flashcardSets);
-        console.log("response.data: ",response.data.flashcardSets)
-        setAllFlashCard(response.data.flashcardSets)
+        console.log("response.data: ", response.data.flashcardSets);
+        setAllFlashCard(response.data.flashcardSets);
       }
     } catch (error) {
       console.error("Error fetching flashcard sets:", error);
     }
   };
   useEffect(() => {
-    fetchFlashcardHandler()
-  }, [])
-
+    fetchFlashcardHandler();
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -134,23 +132,30 @@ const FlashcardsMain = () => {
 
           {/* Grid layout for flashcards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-5">
-            {allFlashCard.length>0 ?  allFlashCard.map((material, index) => (
-              <div
-                key={material._id}
-                className={`cursor-pointer rounded-lg shadow-md ${selectedMaterials.has(index)
-                    ? "ring-2 ring-blue-500 bg-blue-50"
-                    : "bg-white"
+            {allFlashCard.length > 0 ? (
+              allFlashCard.map((material, index) => (
+                <div
+                  key={material._id}
+                  className={`cursor-pointer rounded-lg shadow-md ${
+                    selectedMaterials.has(index)
+                      ? "ring-2 ring-blue-500 bg-blue-50"
+                      : "bg-white"
                   }`}
-                onClick={() => toggleSelectMaterial(index)}
-              >
-                <FlashcardSetCard
-                  material={material}
-                  isSelected={selectedMaterials.has(index)}
-                  onEdit={() => handleEdit(material._id)}
-                  onStudy={() => handleStudy(material._id)}
-                />
+                  onClick={() => toggleSelectMaterial(index)}
+                >
+                  <FlashcardSetCard
+                    material={material}
+                    isSelected={selectedMaterials.has(index)}
+                    onEdit={() => handleEdit(material._id)}
+                    onStudy={() => handleStudy(material._id)}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
+                <img src={spinner} alt="" />
               </div>
-            )) : <p>Loading....</p>}
+            )}
           </div>
         </div>
       </div>
@@ -160,6 +165,4 @@ const FlashcardsMain = () => {
 
 export default FlashcardsMain;
 
-
-
-// speeed optimization 
+// speeed optimization
