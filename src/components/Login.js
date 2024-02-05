@@ -66,11 +66,11 @@ const Login = () => {
       if (response.data && response.data.user) {
         setUser(response.data.user);
         setPlanId(response.data.user.planId);
-        console.log("response.data: ", response.data.user.isSubscriptionActive)
+        console.log("response.data: ", response.data.user)
         await checkAuth();
 
         navigate(
-          response.data.user.isSubscriptionActive ? "/ai-audio-summarizer" : "/pricing"
+          response.data.user.planId === "defaultPlanId" ?  "/pricing" : "/ai-audio-summarizer" 
         );
         return true;
       } else {

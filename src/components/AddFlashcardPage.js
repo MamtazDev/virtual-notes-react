@@ -106,7 +106,6 @@ const AddFlashcardPage = () => {
       ...currentFlashcards,
     ]);
 
- 
 
     try {
       const response = await fetch(`${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/`, {
@@ -130,22 +129,12 @@ const AddFlashcardPage = () => {
     }finally{
       setLoading(false)
     }
-
-
- 
-
-
     setOpenNew(false)
   }
 
   const editFlahCard = async() => {
-  
-
-
-
     const EditFlashcardData = { term: editingFlashcard.term, definition: editingFlashcard.definition };
     console.log("editingFlashcard:", editingFlashcard)
-
 
     // await addNewFlashcard(EditFlashcardData, setId);
 
@@ -176,10 +165,6 @@ const AddFlashcardPage = () => {
     }finally{
       setLoading(false)
     }
-  
-
-
-
     setOpen(false)
   }
 
@@ -200,6 +185,9 @@ const AddFlashcardPage = () => {
       const response = await axios.delete(url, { withCredentials: true });
 
       if (response.status === 200) {
+
+        console.log("Delete Route Hitted!", response)
+
         // Remove the deleted flashcard from the current state
         setFlashcards((currentFlashcards) =>
           currentFlashcards.filter((flashcard) => flashcard._id !== flashcardId)
