@@ -27,8 +27,6 @@ function Sidebar({ setHaveSubscription = null }) {
     useContext(UserContext);
   const [isBouncing, setIsBouncing] = useState(false);
 
-
-
   const navItems = [
     { name: "Home", icon: HomeIcon, to: "/", requiredPlans: [] },
     {
@@ -71,15 +69,15 @@ function Sidebar({ setHaveSubscription = null }) {
   ];
 
   const handleLinkClick = (item) => {
-    console.log("item:", item)
+    console.log("item:", item);
 
     if (item.requiredPlans.length > 0 && !item.requiredPlans.includes(planId)) {
       // alert("Upgrade to access this feature.");
       Swal.fire({
-        title: 'Upgrade required!',
-        text: 'Upgrade to access this feature.',
-        icon: 'warning',
-        confirmButtonText: 'OK'
+        title: "Upgrade required!",
+        text: "Upgrade to access this feature.",
+        icon: "warning",
+        confirmButtonText: "OK",
       });
       return;
     }
@@ -99,12 +97,10 @@ function Sidebar({ setHaveSubscription = null }) {
     setTimeout(() => setIsBouncing(false), 500);
   };
 
-
   useEffect(() => {
-    
     console.log("Sidebar Current planId:", planId);
-    setHaveSubscription !== null &&  setHaveSubscription(planId)
-  }, [planId])
+    setHaveSubscription !== null && setHaveSubscription(planId);
+  }, [planId]);
   return (
     <div>
       <div className="absolute top-4 left-4 lg:hidden">
@@ -116,16 +112,17 @@ function Sidebar({ setHaveSubscription = null }) {
 
       {/* Sidebar */}
       <aside
-        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-10 ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } lg:translate-x-0 flex flex-col`}
+        className={`transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-10 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 flex flex-col`}
       >
         <div className="flex items-center justify-between p-4 mb-8">
           <Link to="/" className="flex items-center">
-            <span className="font-bold text-gray-700 text-2xl align-middle">
+            <span className="font-bold text-blue-500  text-2xl align-middle">
               Virtu
             </span>{" "}
-            <span className="font-bold text-blue-500 text-2xl align-middle">
-              Notes
+            <span className="font-bold text-gray-700 text-2xl align-middle">
+              notes
             </span>
           </Link>
           <XIcon

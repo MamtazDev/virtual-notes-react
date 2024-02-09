@@ -23,10 +23,8 @@ const FlashcardDisplay = () => {
   const [flashcards, setFlashcards] = useState(null);
   const [title, setTitle] = useState(location.state?.title);
 
-
-  // flash card id diye all flash card fetch korte hbe 
-  console.log("setId:", setId)
-
+  // flash card id diye all flash card fetch korte hbe
+  console.log("setId:", setId);
 
   const fetchFlashcardHandler = async () => {
     try {
@@ -38,21 +36,20 @@ const FlashcardDisplay = () => {
       );
       if (response.data && response.data.flashcardSets) {
         // setFlashcardSets(response.data.flashcardSets);
-        const allCard = response.data.flashcardSets
-        const seletedFlashcard =  allCard.filter((item) => item._id === setId)
-        
-        console.log("response.flashcardSets: ",seletedFlashcard)
+        const allCard = response.data.flashcardSets;
+        const seletedFlashcard = allCard.filter((item) => item._id === setId);
 
+        console.log("response.flashcardSets: ", seletedFlashcard);
 
-        setFlashcards(seletedFlashcard[0].flashcards)
+        setFlashcards(seletedFlashcard[0].flashcards);
       }
     } catch (error) {
       console.error("Error fetching flashcard sets:", error);
     }
   };
   useEffect(() => {
-    fetchFlashcardHandler()
-  }, [])
+    fetchFlashcardHandler();
+  }, []);
   useEffect(() => {
     console.log("Location state on FlashcardDisplay:", location.state);
     async function fetchFlashcards() {
@@ -101,9 +98,7 @@ const FlashcardDisplay = () => {
   };
 
   const handleEditFlashcards = (setId) => {
-
-
-    console.log("titletitletitle",setId,flashcards,title)
+    console.log("titletitletitle", setId, flashcards, title);
 
     navigate("/edit-flashcards", {
       state: {
@@ -132,7 +127,7 @@ const FlashcardDisplay = () => {
         */}
 
         {/* Desktop Buttons */}
-        <div className="hidden lg:flex lg:w-full lg:justify-center lg:mb-5 space-x-4">
+        <div className="hidden md:flex md:w-full md:justify-center md:mb-5 space-x-4">
           <button
             onClick={() => handleEditFlashcards(setId)}
             className="text-sm bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600"
@@ -148,7 +143,7 @@ const FlashcardDisplay = () => {
         </div>
 
         {/* Mobile/Tablet Buttons */}
-        <div className="lg:hidden w-full px-4 mb-5 space-y-2">
+        <div className="md:hidden w-full px-4 mb-5 space-y-2">
           <button
             onClick={() => handleEditFlashcards(setId)}
             className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 lg:py-3 px-4 rounded transition-colors w-full sm:w-auto"

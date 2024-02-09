@@ -41,7 +41,6 @@ const CreateFlashcardsSet = () => {
   const isOptionSelected = (optionName) => selectedOption === optionName;
 
   const handleContinue = async () => {
-    // Error checks before starting the async operation
     if (!flashcardSetName.trim()) {
       setErrorMessage("Please provide a name for your flashcard set.");
       return;
@@ -145,7 +144,7 @@ const CreateFlashcardsSet = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 p-6 flex justify-center">
+      <div className="flex-1 p-6 flex justify-center lg:pl-[210px]">
         <div className="w-full max-w-4xl space-y-6 mt-16">
           {/* <button
             onClick={() => navigate(-1)}

@@ -31,11 +31,11 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center space-x-4">
           <Link to="/" className="flex items-center">
-            <span className="font-bold text-gray-700 text-2xl align-middle">
+            <span className="font-bold text-blue-500 text-2xl align-middle">
               Virtu
             </span>{" "}
-            <span className="font-bold text-blue-500 text-2xl align-middle">
-              Notes
+            <span className="font-bold  text-gray-700 text-2xl align-middle">
+              notes
             </span>
           </Link>
         </div>

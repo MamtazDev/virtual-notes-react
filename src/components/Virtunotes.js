@@ -111,7 +111,6 @@ const EduEchoMain = () => {
     };
   }, [timer]);
 
-  // ------
   const handleAudioProcessing = async () => {
     if (mediaRecorder.current) {
       const audioBlob = new Blob(mediaRecorder.current.audioChunks, {
@@ -534,9 +533,9 @@ const EduEchoMain = () => {
                             {new Date(item.date).toLocaleDateString()}{" "}
                           </div>
                         </div>
+
                         {expandedIndex === index && (
                           <div className="mt-4 bg-gray-100 p-4 rounded">
-                            {/* Key Points Section */}
                             <div className="font-semibold mb-2">
                               Key Points:
                             </div>

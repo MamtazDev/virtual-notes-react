@@ -31,13 +31,10 @@ const AddFlashcardPage = () => {
   const [flashcards, setFlashcards] = useState(location.state?.flashcards);
   const [title, setTitle] = useState(location.state?.title);
 
-  const [open, setOpen] = useState(false)
-  const [openNew, setOpenNew] = useState(false)
-  const [isClicked, setIsClicked] = useState(false)
-  const [loading, setLoading] = useState(false)
- 
-
-
+  const [open, setOpen] = useState(false);
+  const [openNew, setOpenNew] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const cancelButtonRef = useRef(null);
 
@@ -51,7 +48,7 @@ const AddFlashcardPage = () => {
       if (setId) {
         try {
           const response = await axios.get(
-            `API_URL/api/flashcard/sets/${setId}`,
+            `${API_URL}/api/flashcard/sets/${setId}`,
             { withCredentials: true }
           );
           if (response.data) {
@@ -83,20 +80,20 @@ const AddFlashcardPage = () => {
   };
 
   const handleAddNewFlashcard = async () => {
-    setOpenNew(true)
+    setOpenNew(true);
     // const newFlashcardData = { term: "", definition: "" };
     // await addNewFlashcard(newFlashcardData, setId);
 
     // // Add a new flashcard box at the very top
-    
   };
 
-
-  const addNewFlahCard = async() => {
-    const newFlashcardData = { term: "Dihan", definition: `odules\@babel\parser\lib\index.js:13100:10)
+  const addNewFlahCard = async () => {
+    const newFlashcardData = {
+      term: "Dihan",
+      definition: `odules\@babel\parser\lib\index.js:13100:10)
     at FlowParserMixin.parseStatementContent (H:\VIrtual Notes\virtual-notes-react\node_modules\@babel\parser\lib\index.js:12683:23)
-    at FlowParserMixin.parseStatementLike (H:\VIrtual Notes\virtual-notes-react\node_modules\@babel\parser\lib\index.js:12588:17)` };
-    
+    at FlowParserMixin.parseStatementLike (H:\VIrtual Notes\virtual-notes-react\node_modules\@babel\parser\lib\index.js:12588:17)`,
+    };
 
     // await addNewFlashcard(newFlashcardData, setId);
 
@@ -106,35 +103,38 @@ const AddFlashcardPage = () => {
       ...currentFlashcards,
     ]);
 
-
     try {
-      const response = await fetch(`${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // Make sure credentials include is set if your API requires it
-  
-  
-        body: JSON.stringify({ term:"New item", definition:"credentials include is set if your API r" }),
-      });
-  
-      const data = await response.json();
-  
-  
-      console.log("data: ", data)
-      
-    } catch (error) {
-      console.error("error", error)
-      
-      
-    }finally{
-      setLoading(false)
-    }
-    setOpenNew(false)
-  }
+      const response = await fetch(
+        `${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Make sure credentials include is set if your API requires it
 
-  const editFlahCard = async() => {
-    const EditFlashcardData = { term: editingFlashcard.term, definition: editingFlashcard.definition };
-    console.log("editingFlashcard:", editingFlashcard)
+          body: JSON.stringify({
+            term: "New item",
+            definition: "credentials include is set if your API r",
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("data: ", data);
+    } catch (error) {
+      console.error("error", error);
+    } finally {
+      setLoading(false);
+    }
+    setOpenNew(false);
+  };
+
+  const editFlahCard = async () => {
+    const EditFlashcardData = {
+      term: editingFlashcard.term,
+      definition: editingFlashcard.definition,
+    };
+    console.log("editingFlashcard:", editingFlashcard);
 
     // await addNewFlashcard(EditFlashcardData, setId);
 
@@ -144,33 +144,32 @@ const AddFlashcardPage = () => {
       ...currentFlashcards,
     ]);
     try {
-      const response = await fetch(`${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/${editingFlashcard?.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // Make sure credentials include is set if your API requires it
-  
-  
-        body: JSON.stringify({ term:editingFlashcard.term, definition: editingFlashcard.definition }),
-      });
-  
-      const data = await response.json();
-  
-  
-      console.log("data: ", data)
-      
-    } catch (error) {
-      console.error("error", error)
-      
-      
-    }finally{
-      setLoading(false)
-    }
-    setOpen(false)
-  }
+      const response = await fetch(
+        `${API_URL}/api/flashcard/flashcard-sets/${setId}/flashcards/${editingFlashcard?.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
 
+          body: JSON.stringify({
+            term: editingFlashcard.term,
+            definition: editingFlashcard.definition,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("data: ", data);
+    } catch (error) {
+      console.error("error", error);
+    } finally {
+      setLoading(false);
+    }
+    setOpen(false);
+  };
 
   const handleDeleteFlashcard = async (flashcardId) => {
-    // Ensure setId and flashcardId are defined
     if (!setId) {
       console.error("setId is undefined");
       return;
@@ -185,10 +184,8 @@ const AddFlashcardPage = () => {
       const response = await axios.delete(url, { withCredentials: true });
 
       if (response.status === 200) {
+        console.log("Delete Route Hitted!", response);
 
-        console.log("Delete Route Hitted!", response)
-
-        // Remove the deleted flashcard from the current state
         setFlashcards((currentFlashcards) =>
           currentFlashcards.filter((flashcard) => flashcard._id !== flashcardId)
         );
@@ -214,7 +211,7 @@ const AddFlashcardPage = () => {
   };
 
   const handleEditChange = (field, value) => {
-    setEditingFlashcard({[field]: value });
+    setEditingFlashcard({ [field]: value });
   };
 
   const startEditing = (flashcard) => {
@@ -232,15 +229,18 @@ const AddFlashcardPage = () => {
     startEditing(flashcard);
   };
 
- 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       <Sidebar />
 
       <div className="flex-grow p-4 mt-10 lg:mt-0 lg:ml-[300px]">
-
         <Transition.Root show={openNew} as={Fragment}>
-          <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenNew}>
+          <Dialog
+            as="div"
+            className="relative z-10"
+            initialFocus={cancelButtonRef}
+            onClose={setOpenNew}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -267,17 +267,23 @@ const AddFlashcardPage = () => {
                   <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                     <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                       <div className="sm:flex sm:items-start">
-                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                          <PlusIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                          <PlusIcon
+                            className="h-6 w-6 text-blue-700"
+                            aria-hidden="true"
+                          />
                         </div>
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                          <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                            Add New FlashCard here 
+                          <Dialog.Title
+                            as="h3"
+                            className="text-base font-semibold leading-6 text-gray-900"
+                          >
+                            Add New Flashcard here
                           </Dialog.Title>
-                          <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                              Are you sure you want to deactivate your account? All of your data will be permanently
-                              removed. This action cannot be undone.
+                          <div>
+                            <p className="text-sm text-gray-500 mb-4">
+                              Are you sure you want to add a flashcard to your
+                              set?
                             </p>
 
                             <input
@@ -296,26 +302,27 @@ const AddFlashcardPage = () => {
                               className="w-full p-2 border rounded mb-2"
                               rows={3}
                             />
-
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button
-                        disabled = {isClicked}
+                        disabled={isClicked}
                         type="button"
-                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                        className="inline-flex w-full justify-center rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 sm:ml-3 sm:w-auto"
                         onClick={() => {
-                          addNewFlahCard()}}
+                          addNewFlahCard();
+                        }}
                       >
-                        Deactivate
+                        Add Flashcard
                       </button>
                       <button
                         type="button"
                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                         onClick={() => {
-                          setOpenNew(false)}}
+                          setOpenNew(false);
+                        }}
                         ref={cancelButtonRef}
                       >
                         Cancel
@@ -327,7 +334,7 @@ const AddFlashcardPage = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        
+
         {/* editFlahCard */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog
@@ -372,29 +379,32 @@ const AddFlashcardPage = () => {
 
                             addNewFlahCard();
                           }}
-                          className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                          className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
                         >
                           <PlusIcon
-                            className="h-6 w-6 text-red-600"
+                            className="h-6 w-6 text-blue-700"
                             aria-hidden="true"
                           />
                         </div>
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                          <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                            Edit Flash Card from here
+                          <Dialog.Title
+                            as="h3"
+                            className="text-base font-semibold leading-6 text-gray-900"
+                          >
+                            Edit Flashcard from here
                           </Dialog.Title>
-                          <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                              Are you sure you want to deactivate your account?
-                              All of your data will be permanently removed. This
-                              action cannot be undone.
+                          <div>
+                            <p className="text-sm text-gray-500 mb-4">
+                              Are you sure you want to edit this flashcard?
                             </p>
 
                             <input
                               type="text"
                               placeholder="Term"
                               Value={editingFlashcard.term}
-                              onChange={(e) => handleEditChange("term", e.target.value)}
+                              onChange={(e) =>
+                                handleEditChange("term", e.target.value)
+                              }
                               className="w-full p-2 border rounded mb-2"
                             />
                             <textarea
@@ -412,25 +422,24 @@ const AddFlashcardPage = () => {
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button
-                        disabled = {isClicked}
+                        disabled={isClicked}
                         type="button"
-                        className="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm  hover:bg-blue-700 sm:ml-3 sm:w-auto transition ease-in-out"
+                        className="inline-flex w-full justify-center rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm  hover:bg-blue-600 sm:ml-3 sm:w-auto transition ease-in-out"
                         onClick={() => {
                           setEditingFlashcard({
                             id: null,
                             term: "",
                             definition: "",
-                          })
-                          
-                          editFlahCard()}
-                        }
+                          });
+
+                          editFlahCard();
+                        }}
                       >
                         Done
                       </button>
                       <button
                         type="button"
-                        className="
-                        inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                         onClick={() => {
                           setEditingFlashcard({
                             id: null,
@@ -450,7 +459,7 @@ const AddFlashcardPage = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="pt-8 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+        <div className="pt-8 flex flex-col md:flex-row md:items-center md:justify-between">
           {/* Flashcard Set Title and Description */}
           <div>
             <h1 className="text-3xl font-bold text-gray-800">

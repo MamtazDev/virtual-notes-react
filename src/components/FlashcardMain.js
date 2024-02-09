@@ -64,8 +64,8 @@ const FlashcardsMain = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (location.state?.fromCreation) {
-        await fetchFlashcardSets(); // Make sure this is awaited
-        navigate(location.pathname, { replace: true, state: {} }); // Then navigate
+        await fetchFlashcardSets();
+        navigate(location.pathname, { replace: true, state: {} });
       }
     };
 
@@ -81,14 +81,29 @@ const FlashcardsMain = () => {
         }
       );
       if (response.data && response.data.flashcardSets) {
-        // setFlashcardSets(response.data.flashcardSets);
         console.log("response.data: ", response.data.flashcardSets);
         setAllFlashCard(response.data.flashcardSets);
       }
     } catch (error) {
-      console.error("Error fetching flashcard sets:", error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.error("Error request:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+      }
+      console.error("Error config:", error.config);
     }
   };
+
   useEffect(() => {
     fetchFlashcardHandler();
   }, []);
@@ -152,8 +167,8 @@ const FlashcardsMain = () => {
                 </div>
               ))
             ) : (
-              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
-                <img src={spinner} alt="" />
+              <div className="col-span-1 sm:col-span-2 lg:col-span-3 text-xl text-center text-gray-500 py-[300px]">
+                No flashcards available.
               </div>
             )}
           </div>
