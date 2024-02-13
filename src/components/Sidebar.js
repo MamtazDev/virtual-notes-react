@@ -35,7 +35,7 @@ function Sidebar({ setHaveSubscription = null }) {
       name: "Class Summarizer",
       icon: MicrophoneIcon,
       to: "/ai-audio-summarizer",
-      requiredPlans: [],
+      requiredPlans: ["student_plan", "free_trial"],
     },
     {
       name: "Quiz Generation",
@@ -47,7 +47,7 @@ function Sidebar({ setHaveSubscription = null }) {
       name: "Flashcards",
       icon: ClipboardListIcon,
       to: "/flashcards",
-      requiredPlans: [],
+      requiredPlans: ["student_plan", "free_trial"],
     },
     {
       name: "AI Tutor",
@@ -79,7 +79,8 @@ function Sidebar({ setHaveSubscription = null }) {
         title: 'Upgrade required!',
         text: 'Upgrade to access this feature.',
         icon: 'warning',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3b82f6',
       });
       return;
     }
@@ -121,11 +122,11 @@ function Sidebar({ setHaveSubscription = null }) {
       >
         <div className="flex items-center justify-between p-4 mb-8">
           <Link to="/" className="flex items-center">
-            <span className="font-bold text-gray-700 text-2xl align-middle">
+            <span className="font-bold text-blue-500  text-2xl align-middle">
               Virtu
             </span>{" "}
-            <span className="font-bold text-blue-500 text-2xl align-middle">
-              Notes
+            <span className="font-bold text-gray-700 text-2xl align-middle">
+              notes
             </span>
           </Link>
           <XIcon

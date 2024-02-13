@@ -53,11 +53,11 @@ function About() {
             <section className="mb-4 px-8">
               <div className="container mx-auto text-center">
                 <h2 className="text-4xl leading-10 font-extrabold text-gray-900 mb-10">
-                  About VirtuNotes
+                  About Virtunotes
                 </h2>
 
                 <p className="text-lg leading-7 text-gray-500 mb-6">
-                  At VirtuNotes, we believe in the power of learning and the
+                  At Virtunotes, we believe in the power of learning and the
                   limitless potential of the human mind. Our commitment goes
                   beyond technology—it's rooted deeply in making the learning
                   and comprehension process more streamlined, efficient, and
@@ -79,7 +79,7 @@ function About() {
                 </p>
 
                 <p className="text-lg leading-7 text-gray-500">
-                  At the heart of VirtuNotes is a genuine desire to make a
+                  At the heart of Virtunotes is a genuine desire to make a
                   difference. We envisage a world where information absorption
                   is no longer a challenge, but a pleasure. Where every
                   individual, irrespective of their background or profession,
@@ -97,7 +97,7 @@ function About() {
             <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
               <div className="lg:text-center">
                 <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 text-center">
-                  Why Choose VirtuNotes?
+                  Why Choose Virtunotes?
                 </h3>
               </div>
 
@@ -113,7 +113,7 @@ function About() {
                           Innovative Learning
                         </h4>
                         <p className="mt-2 text-base leading-6 text-gray-500">
-                          Harnessing AI to reinvent the note-taking process,
+                          Harnessing AI to reinvent the learning process,
                           ensuring effective and adaptive learning.
                         </p>
                       </div>

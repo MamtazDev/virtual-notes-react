@@ -72,7 +72,7 @@ function Home() {
           <Navbar />
 
           {/* Main Content */}
-          <div className="container mx-auto px-6 pt-[70px]">
+          <div className="container mx-auto px-6 pt-[80px] lg:pt-[140px]">
             {/* Hero Section */}
             <div className="flex flex-col lg:flex-row items-center justify-between mb-16 space-y-8 lg:space-y-0">
               {/* Right Content for Mobile/Tablet */}
@@ -93,9 +93,7 @@ function Home() {
                   Amplify Your Learning
                 </h1>
                 <p className="lg:text-md mb-6">
-                  Harness the power of AI to distill lectures into concise
-                  takeaways and detailed summaries. Elevate your comprehension
-                  effortlessly.
+                  Experience the best adaptable tools for students on the market, making learning easier, more accessible, and efficient.
                 </p>
                 <div className="flex justify-center lg:justify-start space-x-4">
                   <button

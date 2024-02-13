@@ -76,6 +76,7 @@ const PlanPricing = () => {
             Free forever with essential features
           </p>
 
+{/*
           <button
             onClick={() => handlePlanSelection("free_trial")}
             disabled={isCurrentPlan("free_trial") || hasUsedFreeTrial()}
@@ -88,7 +89,14 @@ const PlanPricing = () => {
             {isCurrentPlan("free_trial")
               ? "Your Current Plan"
               : "Start Free Trial"}
-          </button>
+          </button> */}
+
+<button
+  className="bg-gray-500 w-full text-white font-bold py-3 rounded-lg opacity-50 cursor-not-allowed text-lg border-b mb-6 font-semibold"
+  disabled
+>
+  Coming Soon
+</button>
 
           <div className="border-b mb-6"></div>
           <ul className="mb-6">
@@ -178,6 +186,8 @@ const PlanPricing = () => {
           <p className="text-gray-500 text-sm mb-6">
             Specialized features for students on a budget
           </p>
+
+          {/*
           <button
             onClick={() => handlePlanSelection("student_plan")}
             disabled={isCurrentPlan("student_plan")}
@@ -190,7 +200,14 @@ const PlanPricing = () => {
             {isCurrentPlan("student_plan")
               ? "Your Current Plan"
               : "Choose Student Plan"}
-          </button>
+          </button> */}
+
+<button
+  className="bg-gray-500 w-full text-white font-bold py-3 rounded-lg opacity-50 cursor-not-allowed text-lg border-b mb-6 font-semibold"
+  disabled
+>
+Coming Soon
+</button>
 
           <div className="border-b mb-6"></div>
           <ul className="mb-6">
