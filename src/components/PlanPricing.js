@@ -52,7 +52,7 @@ const PlanPricing = () => {
     });
   };
   return (
-    <div className="flex-1 container mx-auto px-6 py-12 mt-4">
+    <div className="flex-1 container mx-auto px-2 lg:px-6 py-12 mt-4">
       <div className="text-center space-y-6 mb-12">
         <h1 className="text-4xl font-extrabold">Plans & Pricing</h1>
         <p className="text-lg sm:text-xl text-gray-700">

@@ -16,7 +16,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    if (user && user.planId) {
+    if (user && user.planId !== 'defaultPlanId') {
       navigate("/ai-audio-summarizer");
     } else if (user && !user.planId) {
       navigate("/pricing");
@@ -26,7 +26,7 @@ function Home() {
   };
 
   const handleSectionButtonClick = () => {
-    if (user && user.planId) {
+    if (user && user.planId !== 'defaultPlanId') {
       navigate("/ai-audio-summarizer");
     } else {
       navigate("/pricing");
@@ -68,11 +68,11 @@ function Home() {
   return (
     <motion.div className="flex flex-col min-h-screen pt-4" {...fadeIn}>
       <div className="bg-transparent px-6 pt-1 border-b border-white">
-        <div className="container mx-auto flex flex-col px-4 lg:px-20 ">
+        <div className="container mx-auto flex flex-col px-2 lg:px-20 ">
           <Navbar />
 
           {/* Main Content */}
-          <div className="container mx-auto px-6 pt-[80px] lg:pt-[140px]">
+          <div className="container mx-auto px-2 lg:px-6 pt-[80px] lg:pt-[140px]">
             {/* Hero Section */}
             <div className="flex flex-col lg:flex-row items-center justify-between mb-16 space-y-8 lg:space-y-0">
               {/* Right Content for Mobile/Tablet */}
@@ -100,7 +100,7 @@ function Home() {
                     onClick={handleButtonClick}
                     className="transition duration-300 transform hover:scale-105 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow"
                   >
-                    {user ? "Go to Dashboard" : "Get Started Free"}
+                    {user.planId !== 'defaultPlanId' ? "Go to Dashboard" : "Get Started Free"}
                   </button>
                   <button
                     onClick={() => navigate("/contact")}

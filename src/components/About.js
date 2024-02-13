@@ -45,12 +45,13 @@ function About() {
   return (
     <motion.div className="flex flex-col min-h-screen pt-4" {...fadeIn}>
       <div className="bg-transparent px-6 pt-1 border-b border-white">
-        <div className="container mx-auto flex flex-col px-4 lg:px-20">
+        <div className="container mx-auto flex flex-col px-2 lg:px-20">
           <Navbar />
+        
 
           {/* Main Content */}
-          <div className="container mx-auto px-6 pt-[70px]">
-            <section className="mb-4 px-8">
+          <div className="container mx-auto px-2 lg:px-4 pt-[70px]">
+            <section className="mb-4 px-2 md:px-8">
               <div className="container mx-auto text-center">
                 <h2 className="text-4xl leading-10 font-extrabold text-gray-900 mb-10">
                   About Virtunotes

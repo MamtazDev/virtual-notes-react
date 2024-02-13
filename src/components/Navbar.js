@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-transparent px-6 pt-4">
+    <div className="bg-transparent lg:px-6 pt-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center space-x-4">
