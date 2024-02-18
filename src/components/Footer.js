@@ -45,9 +45,9 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left">
           {/* About Section */}
           <div>
-            <h2 className="text-xl font-bold mb-4">About VirtuNotes</h2>
+            <h2 className="text-xl font-bold mb-4">About Virtunotes</h2>
             <p className="mb-4">
-              Your trusted partner in virtual note-taking and productivity.
+              Your trusted partner in making learning a personalized and adaptable experience.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export const Footer = () => {
                   className="hover:text-blue-400 transition-colors duration-200"
                   onClick={() => handleNavigation("/")}
                 >
-                  Why VirtuNotes
+                  Why Virtunotes
                 </Link>
               </li>
               <li>
@@ -134,9 +134,10 @@ export const Footer = () => {
             <p className="mb-4">
               Stay updated with the latest news and exclusive offers.
             </p>
+
             <form
               onSubmit={handleSubmit}
-              className="flex flex-wrap justify-center sm:justify-start"
+              className="hidden md:flex justify-center sm:justify-start"
             >
               <input
                 type="email"
@@ -153,6 +154,28 @@ export const Footer = () => {
                 Subscribe
               </button>
             </form>
+
+            <form
+  onSubmit={handleSubmit}
+  className="flex flex-wrap md:hidden justify-center px-14 sm:justify-start"
+>
+  <input
+    type="email"
+    placeholder="Enter your email"
+    value={email}
+    onChange={handleEmailChange}
+    className="w-full sm:w-auto p-2 rounded bg-gray-800 text-white mb-2 sm:mb-0 sm:mr-2"
+    required
+  />
+  <button
+    type="submit"
+    className="w-full sm:w-auto p-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors duration-200"
+  >
+    Subscribe
+  </button>
+</form>
+
+            
             {isSubmitted && (
               <p className="text-green-400 mt-2">Thank you for subscribing!</p>
             )}
@@ -161,7 +184,7 @@ export const Footer = () => {
 
         {/* Copyright Section */}
         <div className="border-t border-gray-800 pt-8 mt-8 text-sm text-center">
-          © 2023 VirtuNotes. All rights reserved.
+          © 2023 Virtunotes. All rights reserved.
         </div>
       </div>
     </footer>

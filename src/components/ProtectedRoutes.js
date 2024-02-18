@@ -6,6 +6,12 @@ const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user || user.planId === "defaultPlanId") {
+      navigate("/pricing");
+    }
+  }, [user, navigate]);  
+
+  useEffect(() => {
     if (!user || !isSubscriptionActive) {
       navigate("/login");
     }

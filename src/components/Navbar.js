@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-transparent px-6 pt-4">
+    <div className="bg-transparent lg:px-6 pt-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center space-x-4">
@@ -34,14 +34,14 @@ const Navbar = () => {
             <span className="font-bold text-blue-500 text-2xl align-middle">
               Virtu
             </span>{" "}
-            <span className="font-bold  text-gray-700 text-2xl align-middle">
+            <span className="font-bold text-gray-700 text-2xl align-middle">
               notes
             </span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden 2xl:flex justify-between items-center w-full">
+        <div className="hidden lg:flex justify-between items-center w-full">
           {/* Desktop Links */}
           <div className="flex space-x-8 ml-auto items-center">
             {user ? (
@@ -57,9 +57,9 @@ const Navbar = () => {
                   to="/about"
                   className="text-black hover:text-blue-500 font-medium transition-colors"
                 >
-                  Why VirtuNotes
+                  Why Virtunotes
                 </NavLink>
-                {user && planId && (
+                {user && planId !== "defaultPlanId" && (
                   <NavLink
                     className="text-black hover:text-blue-500 font-medium transition-colors"
                     to="/ai-audio-summarizer"
@@ -106,7 +106,7 @@ const Navbar = () => {
                   to="/about"
                   className="text-black hover:text-blue-500 font-medium transition-colors"
                 >
-                  Why VirtuNotes
+                  Why Virtunotes
                 </Link>
                 <Link
                   to="/pricing"
@@ -138,7 +138,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="relative 2xl:hidden">
+        <div className="relative lg:hidden">
           <button
             onClick={() => setMenuOpen(!isMenuOpen)}
             className="flex items-center p-2"
@@ -168,9 +168,9 @@ const Navbar = () => {
                     className="flex items-center justify-start space-x-2 text-gray-600 hover:text-blue-600 block"
                   >
                     <InformationCircleIcon className="h-5 w-5" />
-                    <span>Why VirtuNotes</span>
+                    <span>Why Virtunotes</span>
                   </Link>
-                  {user && planId && (
+                  {user && planId !== "defaultPlanId" && (
                     <NavLink
                       to="/ai-audio-summarizer"
                       className="flex items-center justify-start space-x-2 text-gray-600 hover:text-blue-600 block"
@@ -215,7 +215,7 @@ const Navbar = () => {
                     to="/about"
                     className="text-gray-600 hover:text-blue-600 block"
                   >
-                    Why VirtuNotes
+                    Why Virtunotes
                   </Link>
                   <Link
                     to="/pricing"

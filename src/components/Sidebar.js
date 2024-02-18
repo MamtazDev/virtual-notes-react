@@ -33,7 +33,7 @@ function Sidebar({ setHaveSubscription = null }) {
       name: "Class Summarizer",
       icon: MicrophoneIcon,
       to: "/ai-audio-summarizer",
-      requiredPlans: [],
+      requiredPlans: ["student_plan", "free_trial"],
     },
     {
       name: "Quiz Generation",
@@ -45,7 +45,7 @@ function Sidebar({ setHaveSubscription = null }) {
       name: "Flashcards",
       icon: ClipboardListIcon,
       to: "/flashcards",
-      requiredPlans: [],
+      requiredPlans: ["student_plan", "free_trial"],
     },
     {
       name: "AI Tutor",
@@ -78,6 +78,7 @@ function Sidebar({ setHaveSubscription = null }) {
         text: "Upgrade to access this feature.",
         icon: "warning",
         confirmButtonText: "OK",
+        confirmButtonColor: "#3b82f6",
       });
       return;
     }

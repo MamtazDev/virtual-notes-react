@@ -66,7 +66,7 @@ const Contact = () => {
       {...fadeIn}
     >
       <div className="bg-gray-100 px-6 pt-1 border-b border-white">
-        <div className="container mx-auto flex flex-col px-4 lg:px-20 ">
+        <div className="container mx-auto flex flex-col px-2 lg:px-20 ">
           {/* Navbar */}
           <Navbar />
 
@@ -76,7 +76,7 @@ const Contact = () => {
             variants={fadeInUp}
             initial="initial"
             animate={inView ? "animate" : ""}
-            className="flex-1 container mx-auto px-4 lg:px-20 py-12 mb-10 lg:mb-20"
+            className="flex-1 container mx-auto px-2 lg:px-20 py-12 mb-10 lg:mb-20"
           >
             {/* Content Header */}
             <div className="text-center space-y-6 mb-12">

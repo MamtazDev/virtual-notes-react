@@ -67,12 +67,12 @@ function Home() {
 
   return (
     <motion.div className="flex flex-col min-h-screen pt-4" {...fadeIn}>
-      <div className="bg-transparent px-6 pt-1 border-b border-white">
-        <div className="container mx-auto flex flex-col px-4 lg:px-20 ">
+      <div className="bg-transparent px-2 lg:px-6 pt-1 border-b border-white">
+        <div className="container mx-auto flex flex-col px-2 lg:px-20 ">
           <Navbar />
 
           {/* Main Content */}
-          <div className="container mx-auto px-6 pt-[70px]">
+          <div className="container mx-auto px-2 lg:px-6 pt-[80px] lg:pt-[140px]">
             {/* Hero Section */}
             <div className="flex flex-col lg:flex-row items-center justify-between mb-16 space-y-8 lg:space-y-0">
               {/* Right Content for Mobile/Tablet */}
@@ -93,9 +93,7 @@ function Home() {
                   Amplify Your Learning
                 </h1>
                 <p className="lg:text-md mb-6">
-                  Harness the power of AI to distill lectures into concise
-                  takeaways and detailed summaries. Elevate your comprehension
-                  effortlessly.
+                  Experience the best adaptable tools for students on the market, making learning easier, more accessible, and efficient.
                 </p>
                 <div className="flex justify-center lg:justify-start space-x-4">
                   <button

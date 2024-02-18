@@ -12,7 +12,7 @@ function SubscriptionPlans() {
       <div className="flex-1 flex flex-col lg:ml-[250px]">
         {/* Main Content */}
         <div className="bg-transparent px-6 pt-1 border-b border-white">
-          <div className="container mx-auto flex flex-col px-4 lg:px-20">
+          <div className="container mx-auto flex flex-col px-4 lg:px-[30px]">
             <PlanPricing />
           </div>
         </div>
